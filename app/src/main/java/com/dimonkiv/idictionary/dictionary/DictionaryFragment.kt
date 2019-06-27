@@ -2,9 +2,7 @@ package com.dimonkiv.idictionary.dictionary
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.dimonkiv.idictionary.MainActivity
 import com.dimonkiv.idictionary.R
 
@@ -28,6 +26,14 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
 
     private fun initView() {
         view = DictionaryView(this, presenter, getMainActivity(), context!!, root)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getMainActivity(): MainActivity {
