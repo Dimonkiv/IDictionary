@@ -29,10 +29,11 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
+        view.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        view.onOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
     }
 

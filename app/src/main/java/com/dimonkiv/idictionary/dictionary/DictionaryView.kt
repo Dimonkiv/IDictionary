@@ -4,6 +4,9 @@ import android.content.Context
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import com.dimonkiv.idictionary.MainActivity
 import com.dimonkiv.idictionary.R
@@ -20,6 +23,8 @@ class DictionaryView(private val fragment: DictionaryFragment,
 
     init {
         initUI()
+        initToolbar()
+        setListeners()
         presenter.setView(this)
     }
 
@@ -33,5 +38,23 @@ class DictionaryView(private val fragment: DictionaryFragment,
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.title = context.resources.getString(R.string.dictionary)
         fragment.setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_toolbar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) {
+        when (item?.itemId) {
+            R.id.search -> presenter.onSearchButtonClick()
+
+            R.id.settings -> presenter.onSettingsButtonClick()
+        }
+    }
+
+    private fun setListeners() {
+        addBtn.setOnClickListener {
+            presenter.onAddButtonClick()
+        }
     }
 }
