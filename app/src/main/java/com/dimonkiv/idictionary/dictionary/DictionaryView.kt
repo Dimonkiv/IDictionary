@@ -2,12 +2,14 @@ package com.dimonkiv.idictionary.dictionary
 
 import android.content.Context
 import android.support.design.widget.FloatingActionButton
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import com.dimonkiv.idictionary.DictionaryAdapter
 import com.dimonkiv.idictionary.MainActivity
 import com.dimonkiv.idictionary.R
 
@@ -21,9 +23,12 @@ class DictionaryView(private val fragment: DictionaryFragment,
     private lateinit var recyclerView: RecyclerView
     private lateinit var addBtn: FloatingActionButton
 
+    private lateinit var adapter: DictionaryAdapter
+
     init {
         initUI()
         initToolbar()
+        initAdapter()
         setListeners()
         presenter.setView(this)
     }
@@ -50,6 +55,13 @@ class DictionaryView(private val fragment: DictionaryFragment,
 
             R.id.settings -> presenter.onSettingsButtonClick()
         }
+    }
+
+    private fun initAdapter() {
+        adapter = DictionaryAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
     }
 
     private fun setListeners() {
