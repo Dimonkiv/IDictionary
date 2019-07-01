@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import com.dimonkiv.idictionary.DictionaryAdapter
+import com.dimonkiv.idictionary.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.MainActivity
 import com.dimonkiv.idictionary.R
 
