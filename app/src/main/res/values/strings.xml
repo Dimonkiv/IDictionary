@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IDictionary</string>
+    <string name="dictionary">Словник</string>
+    <string name="statistic">Статистика</string>
 </resources>
