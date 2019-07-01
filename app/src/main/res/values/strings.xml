@@ -2,4 +2,7 @@
     <string name="app_name">IDictionary</string>
     <string name="dictionary">Словник</string>
     <string name="statistic">Статистика</string>
+    <string name="settings">Налаштування</string>
+    <string name="search">Пошук</string>
+    <string name="progress">%d%</string>
 </resources>

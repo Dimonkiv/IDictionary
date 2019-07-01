@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import com.dimonkiv.idictionary.dictionary.DictionaryFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initBottomNavigationMenu()
+        changeFragment(FragmentData(FragmentById.DICTIONARY_FRAGMENT))
     }
 
     private fun initBottomNavigationMenu() {
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             if (it.itemId == R.id.navigation_dictionary) {
-
+                changeFragment(FragmentData(FragmentById.DICTIONARY_FRAGMENT))
             } else {
 
             }
@@ -29,10 +31,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeFragment(fragmentData: FragmentData) {
-        val fragmentById = fragmentData.getBundle()
+        val fragmentById = fragmentData.getFragmentById()
 
         when (fragmentById) {
-
+            FragmentById.DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
         }
     }
 

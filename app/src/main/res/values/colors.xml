@@ -5,4 +5,9 @@
     <color name="colorAccent">#F9AA33</color>
     <color name="primaryText">#232F34</color>
     <color name="secondaryText">#4A6572</color>
+
+    <color name="colorPositiveProgressValue">#64DD17</color>
+    <color name="colorPositiveProgressBackground">#AED581</color>
+    <color name="colorNegativeProgressValue">#D50000</color>
+    <color name="colorNegativeProgressBackground">#E57373</color>
 </resources>
