@@ -1,10 +1,14 @@
-package com.dimonkiv.idictionary
+package com.dimonkiv.idictionary.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import com.dimonkiv.idictionary.dictionary.DictionaryFragment
+import com.dimonkiv.idictionary.FragmentById.*
+import com.dimonkiv.idictionary.FragmentData
+import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.card.CardFragment
+import com.dimonkiv.idictionary.ui.dictionary.DictionaryFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initBottomNavigationMenu()
-        changeFragment(FragmentData(FragmentById.DICTIONARY_FRAGMENT))
+        changeFragment(FragmentData(DICTIONARY_FRAGMENT))
     }
 
     private fun initBottomNavigationMenu() {
@@ -22,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             if (it.itemId == R.id.navigation_dictionary) {
-                changeFragment(FragmentData(FragmentById.DICTIONARY_FRAGMENT))
+                changeFragment(FragmentData(DICTIONARY_FRAGMENT))
             } else {
 
             }
@@ -34,7 +38,9 @@ class MainActivity : AppCompatActivity() {
         val fragmentById = fragmentData.getFragmentById()
 
         when (fragmentById) {
-            FragmentById.DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
+            DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
+
+            CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), null)
         }
     }
 
@@ -44,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, fragment)
+            .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
 

@@ -1,4 +1,4 @@
-package com.dimonkiv.idictionary.dictionary
+package com.dimonkiv.idictionary.ui.dictionary
 
 class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionaryContract.Presenter {
 
@@ -23,5 +23,9 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionar
 
     override fun onAddButtonClick() {
 
+    }
+
+    override fun onItemClick() {
+        fragment.showCardFragment()
     }
 }

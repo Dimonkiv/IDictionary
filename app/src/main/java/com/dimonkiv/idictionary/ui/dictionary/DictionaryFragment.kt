@@ -1,9 +1,11 @@
-package com.dimonkiv.idictionary.dictionary
+package com.dimonkiv.idictionary.ui.dictionary
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
-import com.dimonkiv.idictionary.MainActivity
+import com.dimonkiv.idictionary.FragmentById
+import com.dimonkiv.idictionary.FragmentData
+import com.dimonkiv.idictionary.ui.MainActivity
 import com.dimonkiv.idictionary.R
 
 class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
@@ -35,6 +37,10 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         view.onOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showCardFragment() {
+        getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT))
     }
 
     private fun getMainActivity(): MainActivity {
