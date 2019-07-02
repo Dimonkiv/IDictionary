@@ -55,6 +55,16 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
 
+    private fun addFragmentToDialogContainer(fragment: Fragment, bundle: Bundle?) {
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.dialog_container, fragment)
+                .addToBackStack(null)
+                .commit()
     }
 }
