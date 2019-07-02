@@ -1,6 +1,7 @@
 package com.dimonkiv.idictionary.ui.card
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.adapters.CardAdapter
 import com.dimonkiv.idictionary.ui.MainActivity
 
 class CardView(private val fragment: CardFragment,
@@ -23,10 +25,13 @@ class CardView(private val fragment: CardFragment,
     private lateinit var goodCountTV: TextView
     private lateinit var badCountTV: TextView
 
+    private lateinit var adapter: CardAdapter
+
 
     init {
         initUI()
         initToolbar()
+        initAdapter()
         presenter.setView(this)
     }
 
@@ -59,6 +64,13 @@ class CardView(private val fragment: CardFragment,
 
             R.id.settings -> presenter.onSettingsButtonClick()
         }
+    }
+
+    private fun initAdapter() {
+        adapter = CardAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
     }
 
     override fun showTitle(title: String) {
