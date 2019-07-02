@@ -27,5 +27,7 @@ interface IDictionaryContract {
 
     interface Fragment {
         fun showCardFragment()
+
+        fun showInputTypeFragment()
     }
 }

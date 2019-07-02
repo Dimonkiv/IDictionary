@@ -9,6 +9,7 @@ import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.card.CardFragment
 import com.dimonkiv.idictionary.ui.dictionary.DictionaryFragment
+import com.dimonkiv.idictionary.ui.inputtype.InputTypeFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
 
             CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), null)
+
+            INPUT_TYPE_DIALOG_FRAGMENT -> addFragmentToDialogContainer(InputTypeFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
         }
