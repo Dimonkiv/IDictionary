@@ -2,13 +2,14 @@ package com.dimonkiv.idictionary.ui.card
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.dimonkiv.idictionary.FragmentById
+import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.MainActivity
 
 class CardFragment : Fragment(), ICardContract.Fragment {
+
     private lateinit var root: View
     private lateinit var presenter: CardPresenter
     private lateinit var view: CardView
@@ -28,6 +29,19 @@ class CardFragment : Fragment(), ICardContract.Fragment {
 
     private fun initView() {
         view = CardView(this, presenter, getMainActivity(), root, context!!)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        view.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        view.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun showPreviousFragment() {
+        getMainActivity().changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
     }
 
     private fun getMainActivity(): MainActivity {

@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
             DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
 
             CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), null)
+
+            BACK_FRAGMENT -> onBackPressed()
         }
     }
 
