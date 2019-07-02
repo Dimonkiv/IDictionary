@@ -5,4 +5,8 @@
     <string name="settings">Налаштування</string>
     <string name="search">Пошук</string>
     <string name="progress">%d%</string>
+    <string name="create">Додати:</string>
+    <string name="new_card">Створити нову колоду</string>
+    <string name="new_word">Додати нове слово</string>
+    <string name="back">Назад</string>
 </resources>
