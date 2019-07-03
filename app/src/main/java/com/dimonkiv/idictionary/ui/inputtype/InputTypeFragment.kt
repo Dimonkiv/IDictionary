@@ -27,6 +27,10 @@ class InputTypeFragment : Fragment(), View.OnClickListener {
         createCardTV = root.findViewById(R.id.create_new_card_tv)
         addWordTV = root.findViewById(R.id.add_new_word_tv)
         backBtn = root.findViewById(R.id.back_btn)
+
+        createCardTV.setOnClickListener(this)
+        addWordTV.setOnClickListener(this)
+        backBtn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -41,7 +45,7 @@ class InputTypeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showCreateCardDialog() {
-
+        getMainActivity().changeFragment(FragmentData(FragmentById.CREATE_CARD_DIALOG_FRAGMENT))
     }
 
     private fun showAddWordsDialog() {
