@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dimonkiv.idictionary.FragmentById
+import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.MainActivity
 
 class CreateCardFragment : Fragment(), ICreateCardContract.Fragment {
     private lateinit var root: View
@@ -29,5 +32,8 @@ class CreateCardFragment : Fragment(), ICreateCardContract.Fragment {
         view = CreateCardView(presenter, context!!, root)
     }
 
+    override fun showPreviousFragment() {
+        (activity  as MainActivity).changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
+    }
 
 }

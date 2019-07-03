@@ -9,4 +9,7 @@
     <string name="new_card">Створити нову колоду</string>
     <string name="new_word">Додати нове слово</string>
     <string name="back">Назад</string>
+    <string name="enter_name_for_new_card">Введіть назву колоди:</string>
+    <string name="card">Колода</string>
+    <string name="add">Додати</string>
 </resources>

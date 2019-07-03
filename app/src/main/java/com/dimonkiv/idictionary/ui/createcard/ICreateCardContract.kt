@@ -7,7 +7,15 @@ interface ICreateCardContract {
     interface Presenter {
 
         fun setView(view: CreateCardView)
+
+        fun onCardTextChanged(card: String)
+
+        fun onBackButtonClick()
+
+        fun onAddButtonClick()
     }
 
-    interface Fragment
+    interface Fragment {
+        fun showPreviousFragment()
+    }
 }
