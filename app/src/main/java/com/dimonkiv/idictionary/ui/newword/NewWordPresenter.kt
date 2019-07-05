@@ -1,6 +1,7 @@
 package com.dimonkiv.idictionary.ui.newword
 
 class NewWordPresenter(private val fragment: NewWordFragment): INewWordContract.Presenter {
+
     private lateinit var view: NewWordView
 
     init {
@@ -9,5 +10,13 @@ class NewWordPresenter(private val fragment: NewWordFragment): INewWordContract.
 
     override fun setView(view: NewWordView) {
         this.view = view
+    }
+
+    override fun onBackButtonClick() {
+        fragment.showPreviousFragment()
+    }
+
+    override fun onAddButtonClick() {
+
     }
 }

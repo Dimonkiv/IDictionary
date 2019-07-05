@@ -7,7 +7,13 @@ interface INewWordContract {
     interface Presenter {
 
         fun setView(view: NewWordView)
+
+        fun onBackButtonClick()
+
+        fun onAddButtonClick()
     }
 
-    interface Fragment
+    interface Fragment {
+        fun showPreviousFragment()
+    }
 }

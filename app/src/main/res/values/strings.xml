@@ -12,4 +12,5 @@
     <string name="enter_name_for_new_card">Введіть назву колоди:</string>
     <string name="card">Колода</string>
     <string name="add">Додати</string>
+    <string name="select_card">Виберіть колоду:</string>
 </resources>
