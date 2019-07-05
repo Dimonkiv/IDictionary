@@ -3,6 +3,7 @@ package com.dimonkiv.idictionary.ui.newword
 class NewWordPresenter(private val fragment: NewWordFragment): INewWordContract.Presenter {
 
     private lateinit var view: NewWordView
+    private var isAddWordMode = false
 
     init {
 
@@ -13,10 +14,18 @@ class NewWordPresenter(private val fragment: NewWordFragment): INewWordContract.
     }
 
     override fun onBackButtonClick() {
+        if (isAddWordMode) {
+            view.setSelectCardMode()
+            isAddWordMode = false
+            return
+        }
+
         fragment.showPreviousFragment()
     }
 
     override fun onCardItemClick() {
+        isAddWordMode = true
+        view.setAddWordMode()
 
     }
 

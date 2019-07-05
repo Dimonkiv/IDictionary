@@ -13,4 +13,5 @@
     <string name="card">Колода</string>
     <string name="add">Додати</string>
     <string name="select_card">Виберіть колоду:</string>
+    <string name="add_new_word">Додайте нове слово:</string>
 </resources>

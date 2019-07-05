@@ -2,7 +2,11 @@ package com.dimonkiv.idictionary.ui.newword
 
 interface INewWordContract {
 
-    interface View
+    interface View {
+        fun setSelectCardMode()
+
+        fun setAddWordMode()
+    }
 
     interface Presenter {
 
