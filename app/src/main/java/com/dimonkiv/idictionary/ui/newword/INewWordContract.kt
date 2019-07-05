@@ -11,6 +11,8 @@ interface INewWordContract {
         fun onBackButtonClick()
 
         fun onAddButtonClick()
+
+        fun onCardItemClick()
     }
 
     interface Fragment {

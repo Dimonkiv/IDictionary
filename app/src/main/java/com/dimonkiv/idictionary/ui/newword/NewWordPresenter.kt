@@ -16,6 +16,10 @@ class NewWordPresenter(private val fragment: NewWordFragment): INewWordContract.
         fragment.showPreviousFragment()
     }
 
+    override fun onCardItemClick() {
+
+    }
+
     override fun onAddButtonClick() {
 
     }
