@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.dimonkiv.idictionary.R
@@ -14,6 +15,8 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
 
     interface Callback {
         fun onItemClick()
+
+        fun onPlayButtonClick()
     }
 
     private val items = ArrayList<Dictionary>()
@@ -55,6 +58,7 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
         private val subtitleTV: TextView = itemView.findViewById(R.id.subtitle_tv)
         private val progressChart: CustomProgressChart = itemView.findViewById(R.id.progress_chart)
         private val containerRL: RelativeLayout = itemView.findViewById(R.id.container_rl)
+        private val playIB: ImageButton = itemView.findViewById(R.id.play_ib)
 
         fun bind(item: Dictionary) {
             titleTV.text = "${item.title} - ${item.id}"
@@ -63,6 +67,10 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
 
             containerRL.setOnClickListener {
                 callback.onItemClick()
+            }
+
+            playIB.setOnClickListener {
+                callback.onPlayButtonClick()
             }
         }
     }

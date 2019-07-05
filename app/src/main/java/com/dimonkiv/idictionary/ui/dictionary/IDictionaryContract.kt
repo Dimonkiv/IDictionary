@@ -23,6 +23,8 @@ interface IDictionaryContract {
         fun onAddButtonClick()
 
         fun onItemClick()
+
+        fun onPlayButtonClick()
     }
 
     interface Fragment {
