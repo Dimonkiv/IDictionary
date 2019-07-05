@@ -31,5 +31,7 @@ interface IDictionaryContract {
         fun showCardFragment()
 
         fun showInputTypeFragment()
+
+        fun showWordGameFragment()
     }
 }

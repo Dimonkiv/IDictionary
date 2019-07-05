@@ -47,6 +47,10 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
         getMainActivity().changeFragment(FragmentData(FragmentById.INPUT_TYPE_DIALOG_FRAGMENT))
     }
 
+    override fun showWordGameFragment() {
+        getMainActivity().changeFragment(FragmentData(FragmentById.WORD_GAME_FRAGMENT))
+    }
+
     private fun getMainActivity(): MainActivity {
         return activity as MainActivity
     }
