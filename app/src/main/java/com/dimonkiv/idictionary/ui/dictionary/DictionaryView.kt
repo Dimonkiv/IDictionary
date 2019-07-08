@@ -1,4 +1,4 @@
-package com.dimonkiv.idictionary.dictionary
+package com.dimonkiv.idictionary.ui.dictionary
 
 import android.content.Context
 import android.support.design.widget.FloatingActionButton
@@ -10,14 +10,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import com.dimonkiv.idictionary.adapters.DictionaryAdapter
-import com.dimonkiv.idictionary.MainActivity
+import com.dimonkiv.idictionary.ui.MainActivity
 import com.dimonkiv.idictionary.R
 
 class DictionaryView(private val fragment: DictionaryFragment,
                      private val presenter: DictionaryPresenter,
                      private val activity: MainActivity,
                      private val context: Context,
-                     private val view: View) : IDictionaryContract.View {
+                     private val view: View) : IDictionaryContract.View, DictionaryAdapter.Callback {
 
     private lateinit var toolbar: Toolbar
     private lateinit var recyclerView: RecyclerView
@@ -58,7 +58,7 @@ class DictionaryView(private val fragment: DictionaryFragment,
     }
 
     private fun initAdapter() {
-        adapter = DictionaryAdapter()
+        adapter = DictionaryAdapter(this)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
@@ -68,5 +68,9 @@ class DictionaryView(private val fragment: DictionaryFragment,
         addBtn.setOnClickListener {
             presenter.onAddButtonClick()
         }
+    }
+
+    override fun onItemClick() {
+        presenter.onItemClick()
     }
 }

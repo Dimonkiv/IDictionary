@@ -1,4 +1,4 @@
-package com.dimonkiv.idictionary.dictionary
+package com.dimonkiv.idictionary.ui.dictionary
 
 import android.view.Menu
 import android.view.MenuInflater
@@ -21,7 +21,11 @@ interface IDictionaryContract {
         fun onSettingsButtonClick()
 
         fun onAddButtonClick()
+
+        fun onItemClick()
     }
 
-    interface Fragment
+    interface Fragment {
+        fun showCardFragment()
+    }
 }

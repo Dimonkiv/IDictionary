@@ -4,12 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.models.Dictionary
 import com.dimonkiv.idictionary.widgets.CustomProgressChart
 
-class DictionaryAdapter : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
+class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
+
+    interface Callback {
+        fun onItemClick()
+    }
+
     private val items = ArrayList<Dictionary>()
 
     init {
@@ -48,11 +54,16 @@ class DictionaryAdapter : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
         private val titleTV: TextView = itemView.findViewById(R.id.title_tv)
         private val subtitleTV: TextView = itemView.findViewById(R.id.subtitle_tv)
         private val progressChart: CustomProgressChart = itemView.findViewById(R.id.progress_chart)
+        private val containerRL: RelativeLayout = itemView.findViewById(R.id.container_rl)
 
         fun bind(item: Dictionary) {
             titleTV.text = "${item.title} - ${item.id}"
             subtitleTV.text = "${item.countOfWords} слів"
             progressChart.setProgress(item.progress)
+
+            containerRL.setOnClickListener {
+                callback.onItemClick()
+            }
         }
     }
 }

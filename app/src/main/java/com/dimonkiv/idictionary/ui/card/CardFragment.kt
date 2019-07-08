@@ -1,18 +1,21 @@
-package com.dimonkiv.idictionary.dictionary
+package com.dimonkiv.idictionary.ui.card
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
-import com.dimonkiv.idictionary.MainActivity
+import com.dimonkiv.idictionary.FragmentById
+import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.MainActivity
 
-class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
+class CardFragment : Fragment(), ICardContract.Fragment {
+
     private lateinit var root: View
-    private lateinit var presenter: DictionaryPresenter
-    private lateinit var view: DictionaryView
+    private lateinit var presenter: CardPresenter
+    private lateinit var view: CardView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        root = inflater.inflate(R.layout.fragment_dictionary, container, false)
+        root = inflater.inflate(R.layout.fragment_card, container, false)
 
         initPresenter()
         initView()
@@ -21,11 +24,11 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
     }
 
     private fun initPresenter() {
-        presenter = DictionaryPresenter(this)
+        presenter = CardPresenter(this)
     }
 
     private fun initView() {
-        view = DictionaryView(this, presenter, getMainActivity(), context!!, root)
+        view = CardView(this, presenter, getMainActivity(), root, context!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -35,6 +38,10 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         view.onOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showPreviousFragment() {
+        getMainActivity().changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
     }
 
     private fun getMainActivity(): MainActivity {
