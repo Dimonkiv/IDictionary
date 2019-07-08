@@ -18,7 +18,7 @@ class CardAdapter : RecyclerView.Adapter<CardAdapter.ViewHolder>() {
         return items.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
 
     }
 

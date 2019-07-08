@@ -49,7 +49,7 @@ class InputTypeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showAddWordsDialog() {
-
+        getMainActivity().changeFragment(FragmentData(FragmentById.NEW_WORD_DIALOG_FRAGMENT))
     }
 
     private fun showPreviousFragment() {
