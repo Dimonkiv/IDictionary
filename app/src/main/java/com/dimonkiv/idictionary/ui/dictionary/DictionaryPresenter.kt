@@ -25,6 +25,10 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionar
         fragment.showInputTypeFragment()
     }
 
+    override fun onPlayButtonClick() {
+        fragment.showWordGameFragment()
+    }
+
     override fun onItemClick() {
         fragment.showCardFragment()
     }

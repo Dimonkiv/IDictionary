@@ -12,6 +12,7 @@ import com.dimonkiv.idictionary.ui.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.inputtype.InputTypeFragment
 import com.dimonkiv.idictionary.ui.newword.NewWordFragment
+import com.dimonkiv.idictionary.ui.wordgame.WordGameFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
             CREATE_CARD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(CreateCardFragment(), null)
 
             NEW_WORD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(NewWordFragment(), null)
+
+            WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
         }

@@ -73,4 +73,8 @@ class DictionaryView(private val fragment: DictionaryFragment,
     override fun onItemClick() {
         presenter.onItemClick()
     }
+
+    override fun onPlayButtonClick() {
+        presenter.onPlayButtonClick()
+    }
 }
