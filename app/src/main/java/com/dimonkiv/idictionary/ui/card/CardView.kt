@@ -1,9 +1,9 @@
 package com.dimonkiv.idictionary.ui.card
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -20,7 +20,7 @@ class CardView(private val fragment: CardFragment,
                private val context: Context) : ICardContract.View {
 
     private lateinit var toolbar: Toolbar
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var wordCountTV: TextView
     private lateinit var goodCountTV: TextView
     private lateinit var badCountTV: TextView
@@ -69,7 +69,7 @@ class CardView(private val fragment: CardFragment,
     private fun initAdapter() {
         adapter = CardAdapter()
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 

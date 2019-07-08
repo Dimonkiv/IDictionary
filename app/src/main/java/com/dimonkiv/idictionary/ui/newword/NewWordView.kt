@@ -1,8 +1,8 @@
 package com.dimonkiv.idictionary.ui.newword
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -21,7 +21,7 @@ class NewWordView(private val presenter: NewWordPresenter,
     private lateinit var newWordContainerLL: LinearLayout
     private lateinit var englishET: EditText
     private lateinit var ukrainianET: EditText
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var backBtn: Button
     private lateinit var addBtn: Button
 
@@ -48,7 +48,7 @@ class NewWordView(private val presenter: NewWordPresenter,
     private fun initAdapter() {
         adapter = SelectCardAdapter(this)
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 

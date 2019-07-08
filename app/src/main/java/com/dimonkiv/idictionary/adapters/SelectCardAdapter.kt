@@ -1,6 +1,6 @@
 package com.dimonkiv.idictionary.adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.dimonkiv.idictionary.R
 
 
-class SelectCardAdapter(private val callback: Callback) : RecyclerView.Adapter<SelectCardAdapter.ViewHolder>() {
+class SelectCardAdapter(private val callback: Callback) : androidx.recyclerview.widget.RecyclerView.Adapter<SelectCardAdapter.ViewHolder>() {
 
     interface Callback {
         fun onSelectCard()
@@ -29,7 +29,7 @@ class SelectCardAdapter(private val callback: Callback) : RecyclerView.Adapter<S
         holder.bind(item)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         private val titleTV: TextView = itemView.findViewById(R.id.title_tv)
 
         fun bind(item: Int) {

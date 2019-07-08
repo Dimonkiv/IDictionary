@@ -1,6 +1,6 @@
 package com.dimonkiv.idictionary.adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.models.Dictionary
 import com.dimonkiv.idictionary.widgets.CustomProgressChart
 
-class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
+class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.widget.RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
 
     interface Callback {
         fun onItemClick()
@@ -53,7 +53,7 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
     }
 
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         private val titleTV: TextView = itemView.findViewById(R.id.title_tv)
         private val subtitleTV: TextView = itemView.findViewById(R.id.subtitle_tv)
         private val progressChart: CustomProgressChart = itemView.findViewById(R.id.progress_chart)

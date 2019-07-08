@@ -1,7 +1,7 @@
 package com.dimonkiv.idictionary.ui.wordgame
 
 import android.content.Context
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem

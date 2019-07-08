@@ -1,9 +1,9 @@
 package com.dimonkiv.idictionary.ui
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
 import com.dimonkiv.idictionary.FragmentById.*
 import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
@@ -13,6 +13,11 @@ import com.dimonkiv.idictionary.ui.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.inputtype.InputTypeFragment
 import com.dimonkiv.idictionary.ui.newword.NewWordFragment
 import com.dimonkiv.idictionary.ui.wordgame.WordGameFragment
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,9 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
         initBottomNavigationMenu()
         changeFragment(FragmentData(DICTIONARY_FRAGMENT))
+
     }
 
     private fun initBottomNavigationMenu() {

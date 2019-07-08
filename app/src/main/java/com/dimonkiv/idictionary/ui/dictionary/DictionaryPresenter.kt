@@ -1,5 +1,7 @@
 package com.dimonkiv.idictionary.ui.dictionary
 
+import com.crashlytics.android.Crashlytics
+
 class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionaryContract.Presenter {
 
 
@@ -18,7 +20,7 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionar
     }
 
     override fun onSettingsButtonClick() {
-
+        Crashlytics.getInstance().crash()
     }
 
     override fun onAddButtonClick() {
