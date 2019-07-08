@@ -22,7 +22,7 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) : IDictionar
     }
 
     override fun onAddButtonClick() {
-
+        fragment.showInputTypeFragment()
     }
 
     override fun onItemClick() {

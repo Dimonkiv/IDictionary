@@ -43,6 +43,10 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
         getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT))
     }
 
+    override fun showInputTypeFragment() {
+        getMainActivity().changeFragment(FragmentData(FragmentById.INPUT_TYPE_DIALOG_FRAGMENT))
+    }
+
     private fun getMainActivity(): MainActivity {
         return activity as MainActivity
     }

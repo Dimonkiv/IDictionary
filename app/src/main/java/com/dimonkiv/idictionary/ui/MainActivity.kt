@@ -8,7 +8,9 @@ import com.dimonkiv.idictionary.FragmentById.*
 import com.dimonkiv.idictionary.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.card.CardFragment
+import com.dimonkiv.idictionary.ui.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.dictionary.DictionaryFragment
+import com.dimonkiv.idictionary.ui.inputtype.InputTypeFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 
             CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), null)
 
+            INPUT_TYPE_DIALOG_FRAGMENT -> addFragmentToDialogContainer(InputTypeFragment(), null)
+
+            CREATE_CARD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(CreateCardFragment(), null)
+
             BACK_FRAGMENT -> onBackPressed()
         }
     }
@@ -55,6 +61,16 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
 
+    private fun addFragmentToDialogContainer(fragment: Fragment, bundle: Bundle?) {
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.dialog_container, fragment)
+                .addToBackStack(null)
+                .commit()
     }
 }
