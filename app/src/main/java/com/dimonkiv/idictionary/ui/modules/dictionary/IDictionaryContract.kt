@@ -13,6 +13,10 @@ interface IDictionaryContract {
         fun onOptionsItemSelected(item: MenuItem?)
 
         fun showCardList(cardList: List<Card>)
+
+        fun showProgressBar()
+
+        fun hideProgressBar()
     }
 
     interface Presenter {

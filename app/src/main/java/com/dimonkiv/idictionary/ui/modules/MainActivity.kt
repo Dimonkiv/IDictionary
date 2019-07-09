@@ -2,6 +2,9 @@ package com.dimonkiv.idictionary.ui.modules
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.dimonkiv.idictionary.utills.FragmentById.*
@@ -22,11 +25,13 @@ import io.fabric.sdk.android.Fabric
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var progressBar: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
+        progressBar = findViewById(R.id.progress_bar)
         initBottomNavigationMenu()
         changeFragment(FragmentData(DICTIONARY_FRAGMENT))
 
@@ -85,5 +90,13 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.dialog_container, fragment)
                 .addToBackStack(null)
                 .commit()
+    }
+
+    fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 }

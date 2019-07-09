@@ -82,4 +82,12 @@ class DictionaryView(private val fragment: DictionaryFragment,
     override fun showCardList(cardList: List<Card>) {
         adapter.setCardList(cardList)
     }
+
+    override fun showProgressBar() {
+        activity.showProgressBar()
+    }
+
+    override fun hideProgressBar() {
+        activity.hideProgressBar()
+    }
 }

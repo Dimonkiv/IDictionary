@@ -18,11 +18,13 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) :
     }
 
     private fun loadData() {
+        view.showProgressBar()
         val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
         cardDataSource.getAll {
             this.cardList.clear()
             this.cardList.addAll(it)
             showCardList()
+            view.hideProgressBar()
         }
     }
 
