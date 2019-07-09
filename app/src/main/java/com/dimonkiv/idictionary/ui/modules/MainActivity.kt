@@ -19,10 +19,6 @@ import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var progressBar: RelativeLayout
@@ -67,6 +63,11 @@ class MainActivity : AppCompatActivity() {
             WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
+
+            CLOSE_DIALOG_FRAGMENT -> {
+                onBackPressed()
+                onBackPressed()
+            }
         }
     }
 
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.dialog_container, fragment)
-                .addToBackStack(null)
+                .addToBackStack("Dialog")
                 .commit()
     }
 

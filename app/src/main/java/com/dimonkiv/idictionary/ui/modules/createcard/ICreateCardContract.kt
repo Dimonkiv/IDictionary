@@ -2,7 +2,13 @@ package com.dimonkiv.idictionary.ui.modules.createcard
 
 interface ICreateCardContract {
 
-    interface View
+    interface View {
+        fun showMessage(message: String)
+
+        fun showProgressBar()
+
+        fun hideProgressBar()
+    }
 
     interface Presenter {
 
@@ -17,5 +23,7 @@ interface ICreateCardContract {
 
     interface Fragment {
         fun showPreviousFragment()
+
+        fun closeDialogFragments()
     }
 }

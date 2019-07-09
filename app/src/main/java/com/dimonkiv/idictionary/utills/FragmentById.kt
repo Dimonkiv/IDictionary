@@ -2,6 +2,7 @@ package com.dimonkiv.idictionary.utills
 
 enum class FragmentById {
     BACK_FRAGMENT,
+    CLOSE_DIALOG_FRAGMENT,
 
     DICTIONARY_FRAGMENT,
     CARD_FRAGMENT,

@@ -29,11 +29,15 @@ class CreateCardFragment : Fragment(), ICreateCardContract.Fragment {
     }
 
     private fun initView() {
-        view = CreateCardView(presenter, context!!, root)
+        view = CreateCardView(presenter, context!!, activity as MainActivity, root)
     }
 
     override fun showPreviousFragment() {
         (activity  as MainActivity).changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
+    }
+
+    override fun closeDialogFragments() {
+        (activity as MainActivity).changeFragment(FragmentData(FragmentById.CLOSE_DIALOG_FRAGMENT))
     }
 
 }

@@ -6,10 +6,13 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.modules.MainActivity
 
 class CreateCardView(private val presenter: CreateCardPresenter,
                      private val context: Context,
+                     private val activity: MainActivity,
                      private val view: View) : ICreateCardContract.View {
 
     private lateinit var cardET: EditText
@@ -51,5 +54,17 @@ class CreateCardView(private val presenter: CreateCardPresenter,
         addBtn.setOnClickListener {
             presenter.onAddButtonClick()
         }
+    }
+
+    override fun showProgressBar() {
+        activity.showProgressBar()
+    }
+
+    override fun hideProgressBar() {
+        activity.hideProgressBar()
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
