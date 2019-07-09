@@ -12,6 +12,7 @@ import android.view.View
 import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.data.models.Card
 
 class DictionaryView(private val fragment: DictionaryFragment,
                      private val presenter: DictionaryPresenter,
@@ -76,5 +77,9 @@ class DictionaryView(private val fragment: DictionaryFragment,
 
     override fun onPlayButtonClick() {
         presenter.onPlayButtonClick()
+    }
+
+    override fun showCardList(cardList: List<Card>) {
+        adapter.setCardList(cardList)
     }
 }

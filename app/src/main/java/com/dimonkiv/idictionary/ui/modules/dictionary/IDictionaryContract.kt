@@ -3,6 +3,7 @@ package com.dimonkiv.idictionary.ui.modules.dictionary
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.dimonkiv.idictionary.data.models.Card
 
 interface IDictionaryContract {
 
@@ -10,6 +11,8 @@ interface IDictionaryContract {
         fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
 
         fun onOptionsItemSelected(item: MenuItem?)
+
+        fun showCardList(cardList: List<Card>)
     }
 
     interface Presenter {

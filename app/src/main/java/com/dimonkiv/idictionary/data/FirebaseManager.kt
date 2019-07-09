@@ -4,17 +4,17 @@ import com.dimonkiv.idictionary.data.datasources.CardDataSource
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class FirebaseService {
+class FirebaseManager {
 
     companion object {
-        private var instance: FirebaseService? = null
+        private var instance: FirebaseManager? = null
 
         private lateinit var databaseReference: DatabaseReference
         private lateinit var cardDataSource: CardDataSource
 
-        fun getInstance(): FirebaseService {
+        fun getInstance(): FirebaseManager {
             if (instance == null) {
-                instance = FirebaseService()
+                instance = FirebaseManager()
                 initFirebase()
                 initDataSources()
             }

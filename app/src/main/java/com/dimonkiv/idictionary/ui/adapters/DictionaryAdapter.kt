@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.data.models.Dictionary
 import com.dimonkiv.idictionary.ui.widgets.CustomProgressChart
 
@@ -18,24 +19,8 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
         fun onPlayButtonClick()
     }
 
-    private val items = ArrayList<Dictionary>()
+    private val cardList = ArrayList<Card>()
 
-    init {
-        var item = Dictionary(1,"Колода", 100, 65)
-        items.add(item)
-
-        item = Dictionary(2,"Колода", 150, 45)
-        items.add(item)
-
-        item = Dictionary(3,"Колода", 200, 75)
-        items.add(item)
-
-        item = Dictionary(4,"Колода", 250, 25)
-        items.add(item)
-
-        item = Dictionary(5,"Колода", 300, 43)
-        items.add(item)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, pos: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context)
@@ -43,12 +28,18 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return cardList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        val item = items[pos]
-        holder.bind(item)
+        val card = cardList[pos]
+        holder.bind(card)
+    }
+
+    fun setCardList(cardList: List<Card>) {
+        this.cardList.clear()
+        this.cardList.addAll(cardList)
+        notifyDataSetChanged()
     }
 
 
@@ -59,10 +50,8 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
         private val containerRL: RelativeLayout = itemView.findViewById(R.id.container_rl)
         private val playIB: ImageButton = itemView.findViewById(R.id.play_ib)
 
-        fun bind(item: Dictionary) {
-            titleTV.text = "${item.title} - ${item.id}"
-            subtitleTV.text = "${item.countOfWords} слів"
-            progressChart.setProgress(item.progress)
+        fun bind(item: Card) {
+            titleTV.text = item.title
 
             containerRL.setOnClickListener {
                 callback.onItemClick()
