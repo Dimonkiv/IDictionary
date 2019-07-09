@@ -29,7 +29,7 @@ class NewWordFragment : Fragment(), INewWordContract.Fragment {
     }
 
     private fun initView() {
-        view = NewWordView(presenter, context!!, root)
+        view = NewWordView(presenter, context!!, getMainActivity(), root)
     }
 
     override fun showPreviousFragment() {
