@@ -1,5 +1,6 @@
-package com.dimonkiv.idictionary.data.datasources
+package com.dimonkiv.idictionary.data.datasources.implementation
 
+import com.dimonkiv.idictionary.data.datasources.ICardDataSource
 import com.dimonkiv.idictionary.utills.FirebaseTableNames
 import com.dimonkiv.idictionary.data.models.Card
 import com.google.firebase.database.*
