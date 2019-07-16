@@ -23,7 +23,7 @@
         android:textSize="@dimen/small_text"
         android:layout_below="@id/title_tv"/>
 
-    <com.dimonkiv.idictionary.widgets.CustomProgressChart
+    <com.dimonkiv.idictionary.ui.widgets.CustomProgressChart
         android:id="@+id/progress_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

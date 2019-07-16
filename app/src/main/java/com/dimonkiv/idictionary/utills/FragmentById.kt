@@ -1,0 +1,14 @@
+package com.dimonkiv.idictionary.utills
+
+enum class FragmentById {
+    BACK_FRAGMENT,
+    CLOSE_DIALOG_FRAGMENT,
+
+    DICTIONARY_FRAGMENT,
+    CARD_FRAGMENT,
+
+    INPUT_TYPE_DIALOG_FRAGMENT,
+    CREATE_CARD_DIALOG_FRAGMENT,
+    NEW_WORD_DIALOG_FRAGMENT,
+    WORD_GAME_FRAGMENT
+}

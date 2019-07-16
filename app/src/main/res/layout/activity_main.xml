@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <android.support.design.widget.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,5 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 </FrameLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "925882872008",
+    "firebase_url": "https://idictionary-e0ae7.firebaseio.com",
+    "project_id": "idictionary-e0ae7",
+    "storage_bucket": "idictionary-e0ae7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925882872008:android:b3c7739433162b9a",
+        "android_client_info": {
+          "package_name": "com.dimonkiv.idictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925882872008-9j9hdd4sedri5vroc6vejtvjckd1hmij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH0GuwTj7iBwJgxgDolqk_J3NCZEvD-iM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925882872008-9j9hdd4sedri5vroc6vejtvjckd1hmij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
