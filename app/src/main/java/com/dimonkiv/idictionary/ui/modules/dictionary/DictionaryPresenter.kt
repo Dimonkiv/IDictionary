@@ -48,7 +48,7 @@ class DictionaryPresenter(private val fragment: DictionaryFragment) :
         fragment.showWordGameFragment()
     }
 
-    override fun onItemClick() {
-        fragment.showCardFragment()
+    override fun onItemClick(cardId: String) {
+        fragment.showCardFragment(cardId)
     }
 }

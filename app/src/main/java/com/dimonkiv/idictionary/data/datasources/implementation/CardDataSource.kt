@@ -1,5 +1,6 @@
-package com.dimonkiv.idictionary.data.datasources
+package com.dimonkiv.idictionary.data.datasources.implementation
 
+import com.dimonkiv.idictionary.data.datasources.ICardDataSource
 import com.dimonkiv.idictionary.utills.FirebaseTableNames
 import com.dimonkiv.idictionary.data.models.Card
 import com.google.firebase.database.*
@@ -13,6 +14,23 @@ class CardDataSource(private val databaseReference: DatabaseReference): ICardDat
             card.id = it
             databaseReference.child(FirebaseTableNames.CARDS).child(it).setValue(card)
         }
+    }
+
+    override fun getById(cardId: String, onResult: (Card) -> Unit) {
+        databaseReference.child(FirebaseTableNames.CARDS)
+                .child(cardId)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.run {
+                            getValue(Card::class.java)?.let { onResult(it) }
+                        }
+                    }
+
+                })
     }
 
     override fun getAll(onResult: (List<Card>) -> Unit) {

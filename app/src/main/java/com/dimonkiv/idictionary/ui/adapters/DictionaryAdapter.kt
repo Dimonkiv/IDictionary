@@ -14,7 +14,7 @@ import com.dimonkiv.idictionary.ui.widgets.CustomProgressChart
 class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.widget.RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
 
     interface Callback {
-        fun onItemClick()
+        fun onItemClick(cardId: String)
 
         fun onPlayButtonClick()
     }
@@ -54,7 +54,7 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
             titleTV.text = item.title
 
             containerRL.setOnClickListener {
-                callback.onItemClick()
+                callback.onItemClick(item.id)
             }
 
             playIB.setOnClickListener {

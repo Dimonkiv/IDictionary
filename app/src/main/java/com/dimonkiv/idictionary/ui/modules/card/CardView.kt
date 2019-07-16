@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.data.models.Word
 import com.dimonkiv.idictionary.ui.adapters.CardAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
 
@@ -72,6 +73,18 @@ class CardView(private val fragment: CardFragment,
     }
 
     override fun showTitle(title: String) {
-        activity.supportActionBar?.title = "Назва колоди"
+        activity.supportActionBar?.title = title
+    }
+
+    override fun showWords(wordList: List<Word>) {
+        adapter.setWordList(wordList)
+    }
+
+    override fun showProgressBar() {
+        activity.showProgressBar()
+    }
+
+    override fun hideProgressBar() {
+        activity.hideProgressBar()
     }
 }

@@ -29,13 +29,13 @@ interface IDictionaryContract {
 
         fun onAddButtonClick()
 
-        fun onItemClick()
+        fun onItemClick(cardId: String)
 
         fun onPlayButtonClick()
     }
 
     interface Fragment {
-        fun showCardFragment()
+        fun showCardFragment(cardId: String)
 
         fun showInputTypeFragment()
 

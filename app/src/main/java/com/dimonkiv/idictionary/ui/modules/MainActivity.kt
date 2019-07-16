@@ -3,7 +3,6 @@ package com.dimonkiv.idictionary.ui.modules
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progress_bar)
         initBottomNavigationMenu()
         changeFragment(FragmentData(DICTIONARY_FRAGMENT))
-
     }
 
     private fun initBottomNavigationMenu() {
@@ -47,12 +45,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeFragment(fragmentData: FragmentData) {
-        val fragmentById = fragmentData.getFragmentById()
 
-        when (fragmentById) {
+        when (fragmentData.getFragmentById()) {
             DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
 
-            CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), null)
+            CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), fragmentData.getBundle())
 
             INPUT_TYPE_DIALOG_FRAGMENT -> addFragmentToDialogContainer(InputTypeFragment(), null)
 
