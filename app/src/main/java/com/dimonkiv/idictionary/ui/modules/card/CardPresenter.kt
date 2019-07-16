@@ -7,6 +7,7 @@ class CardPresenter(private val fragment: CardFragment) :
     ICardContract.Presenter {
 
     private lateinit var view: CardView
+    private lateinit var cardId: String
 
     init {
 
@@ -14,6 +15,11 @@ class CardPresenter(private val fragment: CardFragment) :
 
     override fun setView(view: CardView) {
         this.view = view
+    }
+
+    override fun setCardId(cardId: String) {
+        this.cardId = cardId
+
     }
 
     override fun onBackButtonClick() {

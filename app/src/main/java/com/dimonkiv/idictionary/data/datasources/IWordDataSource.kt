@@ -9,5 +9,7 @@ interface IWordDataSource {
 
     fun getAll(onResult: (List<Word>) -> Unit)
 
+    fun getAllByCardId(cardId: String, onResult: (List<Word>) -> Unit)
+
     fun getById(id: String, onResult: (Word) -> Unit)
 }

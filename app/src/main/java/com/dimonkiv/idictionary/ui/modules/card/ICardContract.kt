@@ -18,6 +18,8 @@ interface ICardContract {
 
         fun setView(view: CardView)
 
+        fun setCardId(cardId: String)
+
         fun onBackButtonClick()
 
         fun onSearchButtonClick()

@@ -21,35 +21,61 @@ class WordDataSource(private val reference: DatabaseReference) : IWordDataSource
 
     override fun getAll(onResult: (List<Word>) -> Unit) {
         reference.child(FirebaseTableNames.WORDS)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
 
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.run {
+                        val words = children.mapNotNull { it.getValue(Word::class.java) }
+                        onResult(words)
                     }
+                }
 
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.run {
-                            val words = children.mapNotNull { it.getValue(Word::class.java) }
-                            onResult(words)
+            })
+    }
+
+    override fun getAllByCardId(cardId: String, onResult: (List<Word>) -> Unit) {
+        reference.child(FirebaseTableNames.WORDS)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.run {
+                        val words = children.mapNotNull { it.getValue(Word::class.java) }
+                        val wordsByCardId = ArrayList<Word>()
+
+                        for (it in words) {
+                            if (it.cardId == cardId) {
+                                wordsByCardId.add(it)
+                            }
                         }
-                    }
 
-                })
+                        onResult(wordsByCardId)
+                    }
+                }
+
+            })
     }
 
     override fun getById(id: String, onResult: (Word) -> Unit) {
         reference
-                .child(FirebaseTableNames.WORDS)
-                .child(id)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
+            .child(FirebaseTableNames.WORDS)
+            .child(id)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
 
-                    }
+                }
 
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val word = snapshot.getValue(Word::class.java)
-                        word?.run { onResult(word) }
-                    }
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val word = snapshot.getValue(Word::class.java)
+                    word?.run { onResult(word) }
+                }
 
-                })
+            })
     }
+
 }

@@ -71,8 +71,8 @@ class DictionaryView(private val fragment: DictionaryFragment,
         }
     }
 
-    override fun onItemClick() {
-        presenter.onItemClick()
+    override fun onItemClick(cardId: String) {
+        presenter.onItemClick(cardId)
     }
 
     override fun onPlayButtonClick() {

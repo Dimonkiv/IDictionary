@@ -7,6 +7,7 @@ import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.ui.modules.MainActivity
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.modules.card.CardFragment
 
 class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
     private lateinit var root: View
@@ -45,8 +46,9 @@ class DictionaryFragment : Fragment(), IDictionaryContract.Fragment {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun showCardFragment() {
-        getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT))
+    override fun showCardFragment(cardId: String) {
+        getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT,
+            CardFragment.getBundle(cardId)))
     }
 
     override fun showInputTypeFragment() {
