@@ -16,6 +16,23 @@ class CardDataSource(private val databaseReference: DatabaseReference): ICardDat
         }
     }
 
+    override fun getById(cardId: String, onResult: (Card) -> Unit) {
+        databaseReference.child(FirebaseTableNames.CARDS)
+                .child(cardId)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.run {
+                            getValue(Card::class.java)?.let { onResult(it) }
+                        }
+                    }
+
+                })
+    }
+
     override fun getAll(onResult: (List<Card>) -> Unit) {
         databaseReference.child(FirebaseTableNames.CARDS)
             .addValueEventListener(object : ValueEventListener {

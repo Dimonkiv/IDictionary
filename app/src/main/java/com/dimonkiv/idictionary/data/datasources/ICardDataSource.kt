@@ -7,4 +7,6 @@ interface ICardDataSource {
     fun insert(card: Card)
 
     fun getAll(onResult: (List<Card>) -> Unit)
+
+    fun getById(cardId: String, onResult: (Card) -> Unit)
 }
