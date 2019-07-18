@@ -77,12 +77,12 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
 
     /*---------------------------------------------Show initial data--------------------------------------------------*/
     private fun subscribeUI() {
-        viewModel.getCards().observe(this, Observer<List<Card>> { adapter.setCardList(it!!) })
-
         viewModel.getIsLoading().observe(this, Observer<Boolean> {
             if(it) showProgressBar()
             else hideProgressBar()
         })
+
+        viewModel.getCards().observe(this, Observer<List<Card>> { adapter.setCardList(it!!) })
     }
 
     private fun showProgressBar() {
