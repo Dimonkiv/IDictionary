@@ -15,4 +15,6 @@
     <string name="select_card">Виберіть колоду:</string>
     <string name="add_new_word">Додайте нове слово:</string>
     <string name="card_error">Введіть назву колоди!</string>
+    <string name="original_text_error">Введіть оригінальне слово!</string>
+    <string name="translated_text_error">Введіть переклад до слова!</string>
 </resources>
