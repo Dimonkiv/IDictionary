@@ -3,8 +3,6 @@ package com.dimonkiv.idictionary.ui.modules.wordgame
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.*
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,21 +10,24 @@ import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Word
-import com.dimonkiv.idictionary.ui.adapters.SwipeStackAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
-import link.fls.swipestack.SwipeStack
+import com.dimonkiv.idictionary.ui.widgets.SwipeCardView
+import com.mindorks.placeholderview.SwipeDecor
+import com.mindorks.placeholderview.SwipePlaceHolderView
+import com.mindorks.placeholderview.SwipeViewBinder
+import com.mindorks.placeholderview.SwipeViewBuilder
 
 class WordGameFragment : Fragment() {
 
 
     private lateinit var root: View
     private lateinit var toolbar: Toolbar
+    private lateinit var swipePlaceHolder: SwipePlaceHolderView
 
     private val mainActivity: MainActivity
         get() = activity as MainActivity
 
     private lateinit var viewModel: WordGameViewModel
-    private lateinit var swipeCard: SwipeStack
 
 
     /*-----------------------------------------------Initialization---------------------------------------------------*/
@@ -48,7 +49,15 @@ class WordGameFragment : Fragment() {
             setNavigationIcon(R.drawable.ic_arrow_back)
         }
 
-        swipeCard = root.findViewById(R.id.swipe_card)
+        swipePlaceHolder = root.findViewById<SwipePlaceHolderView>(R.id.swipe_card_holder).apply {
+            getBuilder<SwipePlaceHolderView, SwipeViewBuilder<SwipePlaceHolderView>>()
+                .setDisplayViewCount(3)
+                .setSwipeDecor(SwipeDecor()
+                    .setPaddingTop(20)
+                    .setSwipeInMsgLayoutId(R.layout.item_card_in)
+                    .setSwipeOutMsgLayoutId(R.layout.item_card_out))
+                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -65,7 +74,7 @@ class WordGameFragment : Fragment() {
     private fun subscribeUI() {
         viewModel.navigateToPreviousFragment.observe(this, Observer { showPreviousFragment() })
 
-        viewModel.getWords().observe(this, Observer { showWords(it) })
+        viewModel.getWord().observe(this, Observer { showWord(it) })
     }
 
 
@@ -82,8 +91,8 @@ class WordGameFragment : Fragment() {
         mainActivity.supportActionBar?.title = "Назва колоди"
     }
 
-    private fun showWords(words: List<Word>) {
-        swipeCard.adapter = SwipeStackAdapter(words)
+    private fun showWord(word: Word) {
+        swipePlaceHolder.addView(SwipeCardView(context!!, swipePlaceHolder, word))
     }
 
 

@@ -10,31 +10,32 @@ class WordGameViewModel : ViewModel() {
     private val _navigateToPreviousFragment = SingleLiveEvent<Any>()
     private val _showTranslatedWord = SingleLiveEvent<Any>()
 
-    private lateinit var words: MutableLiveData<List<Word>>
+    private lateinit var word: MutableLiveData<Word>
 
 
     /*--------------------------------------------------Get data------------------------------------------------------*/
     val navigateToPreviousFragment: MutableLiveData<Any>
-    get() = _navigateToPreviousFragment
+        get() = _navigateToPreviousFragment
 
     val showTranslatedWord: MutableLiveData<Any>
-    get() = _showTranslatedWord
+        get() = _showTranslatedWord
 
-    fun getWords(): MutableLiveData<List<Word>> {
-        if (!::words.isInitialized) {
-            words = MutableLiveData()
+    fun getWord(): MutableLiveData<Word> {
+        if (!::word.isInitialized) {
+            word = MutableLiveData()
             loadWords()
         }
 
-        return words
+        return word
     }
 
     private fun loadWords() {
-        FirebaseManager.getInstance().getWordDataSource().apply {
-            getAll {
-                words.postValue(it)
+        FirebaseManager.getInstance().getWordDataSource().getAll {words ->
+            for (it in words) {
+                word.postValue(it)
             }
         }
+
     }
 
 

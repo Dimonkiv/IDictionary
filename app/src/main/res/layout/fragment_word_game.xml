@@ -11,8 +11,8 @@
         style="@style/Toolbar"
         app:titleTextColor="@android:color/white" />
 
-    <link.fls.swipestack.SwipeStack
-        android:id="@+id/swipe_card"
+    <com.mindorks.placeholderview.SwipePlaceHolderView
+        android:id="@+id/swipe_card_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"/>
