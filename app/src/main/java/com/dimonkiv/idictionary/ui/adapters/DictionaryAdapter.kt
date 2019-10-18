@@ -16,7 +16,7 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
     interface Callback {
         fun onItemClick(cardId: String)
 
-        fun onPlayButtonClick()
+        fun onPlayButtonClick(cardId: String)
     }
 
     private val cardList = ArrayList<Card>()
@@ -58,7 +58,7 @@ class DictionaryAdapter(private val callback: Callback) : androidx.recyclerview.
             }
 
             playIB.setOnClickListener {
-                callback.onPlayButtonClick()
+                callback.onPlayButtonClick(item.id)
             }
         }
     }

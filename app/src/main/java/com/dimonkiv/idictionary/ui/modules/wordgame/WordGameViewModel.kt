@@ -3,6 +3,7 @@ package com.dimonkiv.idictionary.ui.modules.wordgame
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dimonkiv.idictionary.data.FirebaseManager
+import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.data.models.Word
 import com.dimonkiv.idictionary.utills.SingleLiveEvent
 
@@ -10,7 +11,10 @@ class WordGameViewModel : ViewModel() {
     private val _navigateToPreviousFragment = SingleLiveEvent<Any>()
     private val _showTranslatedWord = SingleLiveEvent<Any>()
 
-    private lateinit var word: MutableLiveData<Word>
+    private lateinit var words: MutableLiveData<List<Word>>
+    private lateinit var card: MutableLiveData<Card>
+
+    var cardId: String = ""
 
 
     /*--------------------------------------------------Get data------------------------------------------------------*/
@@ -20,22 +24,34 @@ class WordGameViewModel : ViewModel() {
     val showTranslatedWord: MutableLiveData<Any>
         get() = _showTranslatedWord
 
-    fun getWord(): MutableLiveData<Word> {
-        if (!::word.isInitialized) {
-            word = MutableLiveData()
+    fun getWords(): MutableLiveData<List<Word>> {
+        if (!::words.isInitialized) {
+            words = MutableLiveData()
             loadWords()
         }
 
-        return word
+        return words
+    }
+
+    fun getCard(): MutableLiveData<Card> {
+        if (!::card.isInitialized) {
+            card = MutableLiveData()
+            loadCard()
+        }
+
+        return card
     }
 
     private fun loadWords() {
-        FirebaseManager.getInstance().getWordDataSource().getAll {words ->
-            for (it in words) {
-                word.postValue(it)
-            }
+        FirebaseManager.getInstance().getWordDataSource().getAll {
+            words.postValue(it)
         }
+    }
 
+    private fun loadCard() {
+        FirebaseManager.getInstance().getCardDataSource().getById(cardId) {
+            card.postValue(it)
+        }
     }
 
 

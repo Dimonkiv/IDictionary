@@ -15,6 +15,7 @@ import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.ui.modules.card.CardFragment
+import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
@@ -105,8 +106,8 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
         getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT, CardFragment.getBundle(cardId)))
     }
 
-    override fun onPlayButtonClick() {
-        getMainActivity().changeFragment(FragmentData(FragmentById.WORD_GAME_FRAGMENT))
+    override fun onPlayButtonClick(cardId: String) {
+        getMainActivity().changeFragment(FragmentData(FragmentById.WORD_GAME_FRAGMENT, WordGameFragment.getBundle(cardId)))
     }
 
 

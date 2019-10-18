@@ -19,33 +19,6 @@ import com.dimonkiv.idictionary.ui.modules.MainActivity
 import com.yuyakaido.android.cardstackview.*
 
 class WordGameFragment : Fragment(), CardStackListener {
-    override fun onCardDisappeared(view: View?, position: Int) {
-        val textView = view!!.findViewById<TextView>(R.id.original_tv)
-        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
-    }
-
-    override fun onCardDragging(direction: Direction?, ratio: Float) {
-        Log.d("CardStackView", "onCardDragging: d = ${direction!!.name}, r = $ratio")
-    }
-
-    override fun onCardSwiped(direction: Direction?) {
-        Log.d("CardStackView", "onCardSwiped: p = ${cardManager.topPosition}, d = $direction")
-
-        }
-
-    override fun onCardCanceled() {
-        Log.d("CardStackView", "onCardCanceled: ${cardManager.topPosition}")
-    }
-
-    override fun onCardAppeared(view: View?, position: Int) {
-        val textView = view!!.findViewById<TextView>(R.id.original_tv)
-    }
-
-    override fun onCardRewound() {
-        Log.d("CardStackView", "onCardRewound: ${cardManager.topPosition}")
-    }
-
-
     private lateinit var root: View
     private lateinit var toolbar: Toolbar
 
@@ -58,6 +31,16 @@ class WordGameFragment : Fragment(), CardStackListener {
 
     private lateinit var viewModel: WordGameViewModel
 
+    companion object {
+        private const val CARD_ID = "cardId"
+
+        fun getBundle(cardId: String): Bundle {
+            return Bundle().apply {
+                putString(CARD_ID, cardId)
+            }
+        }
+    }
+
 
     /*-----------------------------------------------Initialization---------------------------------------------------*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,8 +48,8 @@ class WordGameFragment : Fragment(), CardStackListener {
         viewModel = ViewModelProviders.of(this).get(WordGameViewModel::class.java)
 
         initUI()
+        resumeBundle()
         initCardStack()
-        setTestData()
         setListeners()
         subscribeUI()
 
@@ -108,10 +91,18 @@ class WordGameFragment : Fragment(), CardStackListener {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun resumeBundle() {
+        if (arguments!!.containsKey(CARD_ID)) {
+            viewModel.cardId = arguments!!.getString(CARD_ID)!!
+        }
+    }
+
     private fun subscribeUI() {
         viewModel.navigateToPreviousFragment.observe(this, Observer { showPreviousFragment() })
 
-        viewModel.getWord().observe(this, Observer { showWord(it) })
+        viewModel.getWords().observe(this, Observer { showWords(it) })
+
+        viewModel.getCard().observe(this, Observer { showTitle(it.title) })
     }
 
 
@@ -122,38 +113,46 @@ class WordGameFragment : Fragment(), CardStackListener {
         }
     }
 
-
-    /*---------------------------------------------Show initial data--------------------------------------------------*/
-    private fun showTitle() {
-        mainActivity.supportActionBar?.title = "Назва колоди"
+    override fun onCardDisappeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
     }
 
-    private fun showWord(word: Word) {
+    override fun onCardDragging(direction: Direction?, ratio: Float) {
+        Log.d("CardStackView", "onCardDragging: d = ${direction!!.name}, r = $ratio")
+    }
+
+    override fun onCardSwiped(direction: Direction?) {
+        Log.d("CardStackView", "onCardSwiped: p = ${cardManager.topPosition}, d = $direction")
+
+    }
+
+    override fun onCardCanceled() {
+        Log.d("CardStackView", "onCardCanceled: ${cardManager.topPosition}")
+    }
+
+    override fun onCardAppeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+    }
+
+    override fun onCardRewound() {
+        Log.d("CardStackView", "onCardRewound: ${cardManager.topPosition}")
+    }
+
+
+    /*---------------------------------------------Show initial data--------------------------------------------------*/
+    private fun showTitle(title: String) {
+        mainActivity.supportActionBar?.title = title
+    }
+
+    private fun showWords(words: List<Word>) {
+        cardAdapter.setWords(words)
     }
 
 
     /*--------------------------------------------Other methods-------------------------------------------------------*/
     private fun showPreviousFragment() {
         mainActivity.changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
-    }
-
-    private fun setTestData() {
-        val words = ArrayList<Word>()
-
-        var word = Word("", "run", "бігати", "")
-        words.add(word)
-        word = Word("", "can", "могти", "")
-        words.add(word)
-        word = Word("", "eat", "їсти", "")
-        words.add(word)
-        word = Word("", "money", "гроші", "")
-        words.add(word)
-        word = Word("", "honey", "мед", "")
-        words.add(word)
-        cardAdapter.setWords(words)
-
-
-
     }
 
 }
