@@ -9,7 +9,6 @@ import com.dimonkiv.idictionary.utills.SingleLiveEvent
 
 class WordGameViewModel : ViewModel() {
     private val _navigateToPreviousFragment = SingleLiveEvent<Any>()
-    private val _showTranslatedWord = SingleLiveEvent<Any>()
 
     private lateinit var words: MutableLiveData<List<Word>>
     private lateinit var card: MutableLiveData<Card>
@@ -20,9 +19,6 @@ class WordGameViewModel : ViewModel() {
     /*--------------------------------------------------Get data------------------------------------------------------*/
     val navigateToPreviousFragment: MutableLiveData<Any>
         get() = _navigateToPreviousFragment
-
-    val showTranslatedWord: MutableLiveData<Any>
-        get() = _showTranslatedWord
 
     fun getWords(): MutableLiveData<List<Word>> {
         if (!::words.isInitialized) {
@@ -58,10 +54,6 @@ class WordGameViewModel : ViewModel() {
     /*---------------------------------------------------Listeners----------------------------------------------------*/
     fun onBackButtonClick() {
         _navigateToPreviousFragment.call()
-    }
-
-    fun onShowTranslateButtonClick() {
-        _showTranslatedWord.call()
     }
 
     fun onSettingsButtonClick() {

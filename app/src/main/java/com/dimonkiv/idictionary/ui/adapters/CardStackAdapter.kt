@@ -3,6 +3,7 @@ package com.dimonkiv.idictionary.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dimonkiv.idictionary.R
@@ -38,10 +39,16 @@ class CardStackAdapter: RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
         private val originalTV: TextView = view.findViewById(R.id.original_tv)
         private val translatedTV: TextView = view.findViewById(R.id.translated_tv)
+        private val showTranslateRL: RelativeLayout = view.findViewById(R.id.show_translate_rl)
 
         fun bind(word: Word) {
             originalTV.text = word.original
             translatedTV.text = word.translated
+
+            showTranslateRL.setOnClickListener {
+                translatedTV.visibility = View.VISIBLE
+                showTranslateRL.visibility = View.GONE
+            }
         }
     }
 }
