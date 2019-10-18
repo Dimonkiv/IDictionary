@@ -6,6 +6,7 @@ import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dimonkiv.idictionary.utills.FragmentById
@@ -16,6 +17,7 @@ import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.ui.modules.card.CardFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
+import com.dimonkiv.idictionary.utills.RecyclerItemTouchHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
@@ -70,6 +72,10 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
 
     private fun initAdapter() {
         adapter = DictionaryAdapter(this)
+
+        ItemTouchHelper(RecyclerItemTouchHelper(adapter, recyclerView, context!!)).apply {
+            attachToRecyclerView(recyclerView)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter

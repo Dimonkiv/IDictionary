@@ -39,7 +39,7 @@ class WordGameViewModel : ViewModel() {
     }
 
     private fun loadWords() {
-        FirebaseManager.getInstance().getWordDataSource().getAll {
+        FirebaseManager.getInstance().getWordDataSource().getAllByCardId(cardId) {
             words.postValue(it)
         }
     }
