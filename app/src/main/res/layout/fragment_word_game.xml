@@ -11,11 +11,12 @@
         style="@style/Toolbar"
         app:titleTextColor="@android:color/white" />
 
-    <com.mindorks.placeholderview.SwipePlaceHolderView
-        android:id="@+id/swipe_card_holder"
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_stack_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:padding="4dp" />
 
 
 </LinearLayout>

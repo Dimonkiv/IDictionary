@@ -1,28 +1,57 @@
 package com.dimonkiv.idictionary.ui.modules.wordgame
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.*
+import android.view.animation.LinearInterpolator
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Word
+import com.dimonkiv.idictionary.ui.adapters.CardStackAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
-import com.dimonkiv.idictionary.ui.widgets.SwipeCardView
-import com.mindorks.placeholderview.SwipeDecor
-import com.mindorks.placeholderview.SwipePlaceHolderView
-import com.mindorks.placeholderview.SwipeViewBinder
-import com.mindorks.placeholderview.SwipeViewBuilder
+import com.yuyakaido.android.cardstackview.*
 
-class WordGameFragment : Fragment() {
+class WordGameFragment : Fragment(), CardStackListener {
+    override fun onCardDisappeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
+    }
+
+    override fun onCardDragging(direction: Direction?, ratio: Float) {
+        Log.d("CardStackView", "onCardDragging: d = ${direction!!.name}, r = $ratio")
+    }
+
+    override fun onCardSwiped(direction: Direction?) {
+        Log.d("CardStackView", "onCardSwiped: p = ${cardManager.topPosition}, d = $direction")
+
+        }
+
+    override fun onCardCanceled() {
+        Log.d("CardStackView", "onCardCanceled: ${cardManager.topPosition}")
+    }
+
+    override fun onCardAppeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+    }
+
+    override fun onCardRewound() {
+        Log.d("CardStackView", "onCardRewound: ${cardManager.topPosition}")
+    }
 
 
     private lateinit var root: View
     private lateinit var toolbar: Toolbar
-    private lateinit var swipePlaceHolder: SwipePlaceHolderView
+
+    private val cardStackView by lazy { root.findViewById<CardStackView>(R.id.card_stack_view) }
+    private val cardManager by lazy {CardStackLayoutManager(context!!, this)}
+    private val cardAdapter by lazy { CardStackAdapter() }
 
     private val mainActivity: MainActivity
         get() = activity as MainActivity
@@ -36,6 +65,8 @@ class WordGameFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(WordGameViewModel::class.java)
 
         initUI()
+        initCardStack()
+        setTestData()
         setListeners()
         subscribeUI()
 
@@ -48,15 +79,21 @@ class WordGameFragment : Fragment() {
             setHasOptionsMenu(true)
             setNavigationIcon(R.drawable.ic_arrow_back)
         }
+    }
 
-        swipePlaceHolder = root.findViewById<SwipePlaceHolderView>(R.id.swipe_card_holder).apply {
-            getBuilder<SwipePlaceHolderView, SwipeViewBuilder<SwipePlaceHolderView>>()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(SwipeDecor()
-                    .setPaddingTop(20)
-                    .setSwipeInMsgLayoutId(R.layout.item_card_in)
-                    .setSwipeOutMsgLayoutId(R.layout.item_card_out))
-                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL)
+    private fun initCardStack(){
+        cardManager.setStackFrom(StackFrom.Top)
+        cardManager.setDirections(Direction.HORIZONTAL)
+        cardManager.setCanScrollHorizontal(true)
+        cardManager.setCanScrollVertical(false)
+        cardManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
+        cardManager.setOverlayInterpolator(LinearInterpolator())
+        cardStackView.layoutManager = cardManager
+        cardStackView.adapter = cardAdapter
+        cardStackView.itemAnimator.apply {
+            if (this is DefaultItemAnimator) {
+                supportsChangeAnimations = false
+            }
         }
     }
 
@@ -92,13 +129,31 @@ class WordGameFragment : Fragment() {
     }
 
     private fun showWord(word: Word) {
-        swipePlaceHolder.addView(SwipeCardView(context!!, swipePlaceHolder, word))
     }
 
 
     /*--------------------------------------------Other methods-------------------------------------------------------*/
     private fun showPreviousFragment() {
         mainActivity.changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
+    }
+
+    private fun setTestData() {
+        val words = ArrayList<Word>()
+
+        var word = Word("", "run", "бігати", "")
+        words.add(word)
+        word = Word("", "can", "могти", "")
+        words.add(word)
+        word = Word("", "eat", "їсти", "")
+        words.add(word)
+        word = Word("", "money", "гроші", "")
+        words.add(word)
+        word = Word("", "honey", "мед", "")
+        words.add(word)
+        cardAdapter.setWords(words)
+
+
+
     }
 
 }
