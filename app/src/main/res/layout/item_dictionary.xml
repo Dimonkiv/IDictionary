@@ -2,15 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:padding="10dp"
+    android:background="@drawable/background_item"
+    android:id="@+id/container_rl">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_item"
-        android:padding="10dp"
-        android:id="@+id/container_rl"/>
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
