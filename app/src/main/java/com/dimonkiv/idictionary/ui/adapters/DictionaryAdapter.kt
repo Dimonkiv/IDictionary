@@ -20,6 +20,8 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
         fun onPlayButtonClick(cardId: String)
 
         fun onRemoveItem(card: Card)
+
+        fun undoRemove()
     }
 
     private var mRecentlyRemovedCard: Card? = null
@@ -67,7 +69,9 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
     }
 
     private fun undoDelete() {
-
+        cardList.add(mRecentlyRemovedCardPosition!!, mRecentlyRemovedCard!!)
+        notifyItemInserted(mRecentlyRemovedCardPosition!!)
+        callback.undoRemove()
     }
 
 

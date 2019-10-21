@@ -120,6 +120,10 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
         viewModel.removeCard(card)
     }
 
+    override fun undoRemove() {
+        viewModel.isMustRemoveCard = false
+    }
+
 
     /*------------------------------------------------Other methods---------------------------------------------------*/
     private fun getMainActivity(): MainActivity {
