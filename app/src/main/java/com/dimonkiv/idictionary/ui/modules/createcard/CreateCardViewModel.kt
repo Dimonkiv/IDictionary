@@ -10,8 +10,8 @@ import com.dimonkiv.idictionary.utills.SingleLiveEvent
 class CreateCardViewModel : ViewModel() {
     private val card = Card()
 
-    private lateinit var _isLoading: MutableLiveData<Boolean>
-    private lateinit var _isShownError: SingleLiveEvent<Any>
+    private var _isLoading = MutableLiveData<Boolean>()
+    private var _isShownError = SingleLiveEvent<Any>()
     private val _closeDialogs = SingleLiveEvent<Any>()
 
 
