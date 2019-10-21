@@ -8,16 +8,16 @@ import com.dimonkiv.idictionary.data.models.Word
 import com.dimonkiv.idictionary.utills.SingleLiveEvent
 
 class NewWordViewModel : ViewModel() {
-    private var _isAddWordMode = MutableLiveData<Boolean>()
-    private lateinit var cards: MutableLiveData<List<Card>>
+    private var _isAddWordMode = MutableLiveData<Boolean>(false)
     private var _isLoading = MutableLiveData<Boolean>()
-
     private var _navigateToPreviousFragment = SingleLiveEvent<Any>()
     private var _originalTextError = SingleLiveEvent<Any>()
     private var _translatedTextError = SingleLiveEvent<Any>()
     private var _clearFields = SingleLiveEvent<Any>()
 
-    private lateinit var word: Word
+    private lateinit var cards: MutableLiveData<List<Card>>
+
+    private val word: Word by lazy { Word() }
 
 
     /*---------------------------------------------------Get data-----------------------------------------------------*/

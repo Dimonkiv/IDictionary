@@ -32,7 +32,7 @@ class NewWordFragment : Fragment(), SelectCardAdapter.Callback {
     private lateinit var backBtn: Button
     private lateinit var addBtn: Button
 
-    private val adapter: SelectCardAdapter by lazy { SelectCardAdapter(this) }
+    private lateinit var adapter: SelectCardAdapter
     private lateinit var viewModel: NewWordViewModel
 
     private val mainActivity: MainActivity
@@ -45,6 +45,7 @@ class NewWordFragment : Fragment(), SelectCardAdapter.Callback {
         viewModel = ViewModelProviders.of(this).get(NewWordViewModel::class.java)
 
         initUI()
+        initAdapter()
         setListeners()
         subscribeUI()
 
@@ -56,12 +57,15 @@ class NewWordFragment : Fragment(), SelectCardAdapter.Callback {
         newWordContainerLL = root.findViewById(R.id.new_word_container_ll)
         englishET = root.findViewById(R.id.english_et)
         ukrainianET = root.findViewById(R.id.ukrainian_et)
-        recyclerView = root.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = adapter
-        }
+        recyclerView = root.findViewById(R.id.recycler_view)
         backBtn = root.findViewById(R.id.back_btn)
         addBtn = root.findViewById(R.id.add_btn)
+    }
+
+    private fun initAdapter() {
+        adapter = SelectCardAdapter(this)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
     }
 
     private fun subscribeUI() {
