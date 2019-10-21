@@ -116,6 +116,10 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
         getMainActivity().changeFragment(FragmentData(FragmentById.WORD_GAME_FRAGMENT, WordGameFragment.getBundle(cardId)))
     }
 
+    override fun onRemoveItem(card: Card) {
+        viewModel.removeCard(card)
+    }
+
 
     /*------------------------------------------------Other methods---------------------------------------------------*/
     private fun getMainActivity(): MainActivity {

@@ -41,4 +41,8 @@ class DictionaryViewModel : ViewModel() {
             isLoading.postValue(false)
         }
     }
+
+    fun removeCard(card: Card) {
+        FirebaseManager.getInstance().getCardDataSource().removeCard(card.id)
+    }
 }

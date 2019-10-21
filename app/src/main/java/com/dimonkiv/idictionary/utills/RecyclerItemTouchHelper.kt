@@ -29,7 +29,7 @@ class RecyclerItemTouchHelper (private val adapter: DictionaryAdapter,
 
     override fun onSwiped(holder: RecyclerView.ViewHolder, p1: Int) {
         val position = holder.adapterPosition
-        //adapter.deleteItem(position, recycler)
+        adapter.removeItem(position, recycler)
     }
 
     override fun onChildDraw(
