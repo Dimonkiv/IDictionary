@@ -13,8 +13,16 @@ class WordGameViewModel : ViewModel() {
     private lateinit var words: MutableLiveData<List<Word>>
     private lateinit var card: MutableLiveData<Card>
 
+    private val _knownCount = MutableLiveData(0)
+    private val _unknownCount = MutableLiveData(0)
+
     var cardId: String = ""
 
+    val knownWordCount: MutableLiveData<Int>
+        get() = _knownCount
+
+    val unknownWordCount: MutableLiveData<Int>
+        get() = _unknownCount
 
     /*--------------------------------------------------Get data------------------------------------------------------*/
     val navigateToPreviousFragment: MutableLiveData<Any>
@@ -38,9 +46,11 @@ class WordGameViewModel : ViewModel() {
         return card
     }
 
+
     private fun loadWords() {
         FirebaseManager.getInstance().getWordDataSource().getAllByCardId(cardId) {
             words.postValue(it)
+            countingKnownAndUnknownWord(it)
         }
     }
 
@@ -58,5 +68,21 @@ class WordGameViewModel : ViewModel() {
 
     fun onSettingsButtonClick() {
 
+    }
+
+    private fun countingKnownAndUnknownWord(words: List<Word>) {
+        var knownCount = 0
+        var unknownCount = 0
+
+        for (it in words) {
+            if (it.isKnow) {
+                knownCount++
+            } else {
+                unknownCount++
+            }
+        }
+
+        _knownCount.postValue(knownCount)
+        _unknownCount.postValue(unknownCount)
     }
 }

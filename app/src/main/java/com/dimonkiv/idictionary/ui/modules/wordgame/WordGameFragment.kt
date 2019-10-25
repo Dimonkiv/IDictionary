@@ -25,6 +25,8 @@ class WordGameFragment : Fragment(), CardStackListener {
     private val cardStackView by lazy { root.findViewById<CardStackView>(R.id.card_stack_view) }
     private val cardManager by lazy {CardStackLayoutManager(context!!, this)}
     private val cardAdapter by lazy { CardStackAdapter() }
+    private val unknownCountTV by lazy { root.findViewById<TextView>(R.id.unknown_count_tv) }
+    private val knownCountTV by lazy { root.findViewById<TextView>(R.id.known_count_tv) }
 
     private val mainActivity: MainActivity
         get() = activity as MainActivity
@@ -103,6 +105,10 @@ class WordGameFragment : Fragment(), CardStackListener {
         viewModel.getWords().observe(this, Observer { showWords(it) })
 
         viewModel.getCard().observe(this, Observer { showTitle(it.title) })
+
+        viewModel.knownWordCount.observe(this, Observer { showKnownCount(it!!) })
+
+        viewModel.unknownWordCount.observe(this, Observer { showUnknownCount(it!!) })
     }
 
 
@@ -149,6 +155,13 @@ class WordGameFragment : Fragment(), CardStackListener {
         cardAdapter.setWords(words)
     }
 
+    private fun showKnownCount(count: Int) {
+        knownCountTV.text = String.format(resources.getString(R.string.known_word_count), count)
+    }
+
+    private fun showUnknownCount(count: Int) {
+        unknownCountTV.text = String.format(resources.getString(R.string.unknown_word_count), count)
+    }
 
     /*--------------------------------------------Other methods-------------------------------------------------------*/
     private fun showPreviousFragment() {

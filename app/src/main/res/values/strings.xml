@@ -17,4 +17,6 @@
     <string name="card_error">Введіть назву колоди!</string>
     <string name="original_text_error">Введіть оригінальне слово!</string>
     <string name="translated_text_error">Введіть переклад до слова!</string>
+    <string name="known_word_count">Знаю - %d</string>
+    <string name="unknown_word_count">Не знаю - %d</string>
 </resources>
