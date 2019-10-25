@@ -49,4 +49,8 @@ class CardDataSource(private val databaseReference: DatabaseReference): ICardDat
 
             })
     }
+
+    override fun removeCard(cardId: String) {
+        databaseReference.child(FirebaseTableNames.CARDS).child(cardId).removeValue()
+    }
 }

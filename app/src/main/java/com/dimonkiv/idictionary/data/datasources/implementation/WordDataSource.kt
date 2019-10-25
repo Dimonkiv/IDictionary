@@ -78,4 +78,10 @@ class WordDataSource(private val reference: DatabaseReference) : IWordDataSource
             })
     }
 
+    override fun updateKnownState(isKnown: Boolean, wordId: String) {
+        reference.child(FirebaseTableNames.WORDS)
+            .child(wordId)
+            .child("isKnown")
+            .setValue(isKnown)
+    }
 }

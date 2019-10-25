@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             NEW_WORD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(NewWordFragment(), null)
 
-            WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), null)
+            WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), fragmentData.getBundle())
 
             BACK_FRAGMENT -> onBackPressed()
 

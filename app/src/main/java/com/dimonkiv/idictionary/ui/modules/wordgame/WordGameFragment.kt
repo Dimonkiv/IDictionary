@@ -1,32 +1,49 @@
 package com.dimonkiv.idictionary.ui.modules.wordgame
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.*
-import android.widget.RelativeLayout
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Word
-import com.dimonkiv.idictionary.ui.adapters.SwipeStackAdapter
+import com.dimonkiv.idictionary.ui.adapters.CardStackAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
-import link.fls.swipestack.SwipeStack
+import com.yuyakaido.android.cardstackview.*
 
-class WordGameFragment : Fragment() {
-
-
+class WordGameFragment : Fragment(), CardStackListener {
     private lateinit var root: View
     private lateinit var toolbar: Toolbar
+
+    private val cardStackView by lazy { root.findViewById<CardStackView>(R.id.card_stack_view) }
+    private val cardManager by lazy {CardStackLayoutManager(context!!, this)}
+    private val cardAdapter by lazy { CardStackAdapter() }
+    private val unknownCountTV by lazy { root.findViewById<TextView>(R.id.unknown_count_tv) }
+    private val knownCountTV by lazy { root.findViewById<TextView>(R.id.known_count_tv) }
 
     private val mainActivity: MainActivity
         get() = activity as MainActivity
 
     private lateinit var viewModel: WordGameViewModel
-    private lateinit var swipeCard: SwipeStack
+
+    companion object {
+        private const val CARD_ID = "cardId"
+        const val LEFT_DIR = "Left"
+        const val RIGHT_DIR = "Right"
+
+        fun getBundle(cardId: String): Bundle {
+            return Bundle().apply {
+                putString(CARD_ID, cardId)
+            }
+        }
+    }
 
 
     /*-----------------------------------------------Initialization---------------------------------------------------*/
@@ -35,6 +52,8 @@ class WordGameFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(WordGameViewModel::class.java)
 
         initUI()
+        resumeBundle()
+        initCardStack()
         setListeners()
         subscribeUI()
 
@@ -47,8 +66,22 @@ class WordGameFragment : Fragment() {
             setHasOptionsMenu(true)
             setNavigationIcon(R.drawable.ic_arrow_back)
         }
+    }
 
-        swipeCard = root.findViewById(R.id.swipe_card)
+    private fun initCardStack(){
+        cardManager.setStackFrom(StackFrom.Top)
+        cardManager.setDirections(Direction.HORIZONTAL)
+        cardManager.setCanScrollHorizontal(true)
+        cardManager.setCanScrollVertical(false)
+        cardManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
+        cardManager.setOverlayInterpolator(LinearInterpolator())
+        cardStackView.layoutManager = cardManager
+        cardStackView.adapter = cardAdapter
+        cardStackView.itemAnimator.apply {
+            if (this is DefaultItemAnimator) {
+                supportsChangeAnimations = false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -62,10 +95,22 @@ class WordGameFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun resumeBundle() {
+        if (arguments!!.containsKey(CARD_ID)) {
+            viewModel.cardId = arguments!!.getString(CARD_ID)!!
+        }
+    }
+
     private fun subscribeUI() {
         viewModel.navigateToPreviousFragment.observe(this, Observer { showPreviousFragment() })
 
         viewModel.getWords().observe(this, Observer { showWords(it) })
+
+        viewModel.getCard().observe(this, Observer { showTitle(it.title) })
+
+        viewModel.knownWordCount.observe(this, Observer { showKnownCount(it!!) })
+
+        viewModel.unknownWordCount.observe(this, Observer { showUnknownCount(it!!) })
     }
 
 
@@ -76,16 +121,50 @@ class WordGameFragment : Fragment() {
         }
     }
 
+    override fun onCardDisappeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+        Log.d("CardStackView", "onCardDisappeared: ($position) ${textView.text}")
+    }
+
+    override fun onCardDragging(direction: Direction?, ratio: Float) {
+        Log.d("CardStackView", "onCardDragging: d = ${direction!!.name}, r = $ratio")
+    }
+
+    override fun onCardSwiped(direction: Direction?) {
+        Log.d("CardStackView", "onCardSwiped: p = ${cardManager.topPosition}, d = $direction")
+        val word = cardAdapter.getWord(cardManager.topPosition)
+        viewModel.onCardSwiped(direction!!.name, word)
+    }
+
+    override fun onCardCanceled() {
+        Log.d("CardStackView", "onCardCanceled: ${cardManager.topPosition}")
+    }
+
+    override fun onCardAppeared(view: View?, position: Int) {
+        val textView = view!!.findViewById<TextView>(R.id.original_tv)
+    }
+
+    override fun onCardRewound() {
+        Log.d("CardStackView", "onCardRewound: ${cardManager.topPosition}")
+    }
+
 
     /*---------------------------------------------Show initial data--------------------------------------------------*/
-    private fun showTitle() {
-        mainActivity.supportActionBar?.title = "Назва колоди"
+    private fun showTitle(title: String) {
+        mainActivity.supportActionBar?.title = title
     }
 
     private fun showWords(words: List<Word>) {
-        swipeCard.adapter = SwipeStackAdapter(words)
+        cardAdapter.setWords(words)
     }
 
+    private fun showKnownCount(count: Int) {
+        knownCountTV.text = String.format(resources.getString(R.string.known_word_count), count)
+    }
+
+    private fun showUnknownCount(count: Int) {
+        unknownCountTV.text = String.format(resources.getString(R.string.unknown_word_count), count)
+    }
 
     /*--------------------------------------------Other methods-------------------------------------------------------*/
     private fun showPreviousFragment() {

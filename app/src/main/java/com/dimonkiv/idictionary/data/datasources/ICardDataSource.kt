@@ -9,4 +9,6 @@ interface ICardDataSource {
     fun getAll(onResult: (List<Card>) -> Unit)
 
     fun getById(cardId: String, onResult: (Card) -> Unit)
+
+    fun removeCard(cardId: String)
 }

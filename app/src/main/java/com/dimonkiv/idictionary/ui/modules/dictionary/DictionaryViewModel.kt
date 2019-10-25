@@ -1,5 +1,6 @@
 package com.dimonkiv.idictionary.ui.modules.dictionary
 
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dimonkiv.idictionary.data.FirebaseManager
@@ -9,6 +10,8 @@ class DictionaryViewModel : ViewModel() {
 
     private lateinit var cards: MutableLiveData<List<Card>>
     private lateinit var isLoading: MutableLiveData<Boolean>
+
+    var isMustRemoveCard = false
 
 
     /*------------------------------------------------------Get data--------------------------------------------------*/
@@ -40,5 +43,18 @@ class DictionaryViewModel : ViewModel() {
             cards.postValue(it)
             isLoading.postValue(false)
         }
+    }
+
+    fun removeCard(card: Card) {
+        startWaitingRemoveTimer(card)
+    }
+
+    private fun startWaitingRemoveTimer(card: Card) {
+        isMustRemoveCard = true
+        Handler().postDelayed({
+            if (isMustRemoveCard) {
+                FirebaseManager.getInstance().getCardDataSource().removeCard(card.id)
+            }
+        }, 400)
     }
 }

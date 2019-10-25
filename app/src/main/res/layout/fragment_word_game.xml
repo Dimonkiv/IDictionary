@@ -11,11 +11,36 @@
         style="@style/Toolbar"
         app:titleTextColor="@android:color/white" />
 
-    <link.fls.swipestack.SwipeStack
-        android:id="@+id/swipe_card"
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_stack_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"/>
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:padding="4dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp">
+
+        <TextView
+            android:id="@+id/unknown_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Не знаю - 20"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <TextView
+            android:id="@+id/known_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Знаю - 0"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
 
 </LinearLayout>

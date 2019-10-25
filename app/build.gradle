@@ -45,7 +45,7 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha02'
 
-    implementation 'link.fls:swipestack:0.3.0'
+    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
 }
 
 apply plugin: 'com.google.gms.google-services'
