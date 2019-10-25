@@ -35,6 +35,8 @@ class WordGameFragment : Fragment(), CardStackListener {
 
     companion object {
         private const val CARD_ID = "cardId"
+        const val LEFT_DIR = "Left"
+        const val RIGHT_DIR = "Right"
 
         fun getBundle(cardId: String): Bundle {
             return Bundle().apply {
@@ -130,7 +132,8 @@ class WordGameFragment : Fragment(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction?) {
         Log.d("CardStackView", "onCardSwiped: p = ${cardManager.topPosition}, d = $direction")
-
+        val word = cardAdapter.getWord(cardManager.topPosition)
+        viewModel.onCardSwiped(direction!!.name, word)
     }
 
     override fun onCardCanceled() {

@@ -12,4 +12,6 @@ interface IWordDataSource {
     fun getAllByCardId(cardId: String, onResult: (List<Word>) -> Unit)
 
     fun getById(id: String, onResult: (Word) -> Unit)
+
+    fun updateKnownState(isKnown: Boolean, wordId: String)
 }

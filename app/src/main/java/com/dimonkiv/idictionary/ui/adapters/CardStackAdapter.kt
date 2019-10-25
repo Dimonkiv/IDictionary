@@ -34,6 +34,9 @@ class CardStackAdapter: RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun getWord(position: Int): Word {
+        return words[position]
+    }
 
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 

@@ -70,6 +70,28 @@ class WordGameViewModel : ViewModel() {
 
     }
 
+    fun onCardSwiped(direction: String, word: Word) {
+        updateWordStatus(word, direction)
+        updateKnownWordCount(direction)
+    }
+
+    private fun updateKnownWordCount(direction: String) {
+        if (direction == WordGameFragment.LEFT_DIR) {
+            _knownCount.postValue(_knownCount.value!! - 1)
+            _unknownCount.postValue(_unknownCount.value!! + 1)
+            return
+        }
+
+        _knownCount.postValue(_knownCount.value!! - 1)
+        _unknownCount.postValue(_unknownCount.value!! + 1)
+    }
+
+    private fun updateWordStatus(word: Word, direction: String) {
+        val isKnown = direction != WordGameFragment.LEFT_DIR
+
+        FirebaseManager.getInstance().getWordDataSource().updateKnownState(isKnown, word.id)
+    }
+
     private fun countingKnownAndUnknownWord(words: List<Word>) {
         var knownCount = 0
         var unknownCount = 0
