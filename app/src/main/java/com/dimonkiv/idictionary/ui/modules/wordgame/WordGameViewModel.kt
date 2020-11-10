@@ -2,7 +2,6 @@ package com.dimonkiv.idictionary.ui.modules.wordgame
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dimonkiv.idictionary.data.FirebaseManager
 import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.data.models.Word
 import com.dimonkiv.idictionary.utills.SingleLiveEvent
@@ -48,16 +47,16 @@ class WordGameViewModel : ViewModel() {
 
 
     private fun loadWords() {
-        FirebaseManager.getInstance().getWordDataSource().getAllByCardId(cardId) {
+        /*FirebaseManager.getInstance().getWordDataSource().getAllByCardId(cardId) {
             words.postValue(it)
             countingKnownAndUnknownWord(it)
-        }
+        }*/
     }
 
     private fun loadCard() {
-        FirebaseManager.getInstance().getCardDataSource().getById(cardId) {
+        /*FirebaseManager.getInstance().getCardDataSource().getById(cardId) {
             card.postValue(it)
-        }
+        }*/
     }
 
 
@@ -89,20 +88,20 @@ class WordGameViewModel : ViewModel() {
     private fun updateWordStatus(word: Word, direction: String) {
         val isKnown = direction != WordGameFragment.LEFT_DIR
 
-        FirebaseManager.getInstance().getWordDataSource().updateKnownState(isKnown, word.id)
+        //FirebaseManager.getInstance().getWordDataSource().updateKnownState(isKnown, word.id)
     }
 
     private fun countingKnownAndUnknownWord(words: List<Word>) {
         var knownCount = 0
         var unknownCount = 0
 
-        for (it in words) {
-            if (it.isKnow) {
+        /*for (it in words) {
+            if (it.state) {
                 knownCount++
             } else {
                 unknownCount++
             }
-        }
+        }*/
 
         _knownCount.postValue(knownCount)
         _unknownCount.postValue(unknownCount)

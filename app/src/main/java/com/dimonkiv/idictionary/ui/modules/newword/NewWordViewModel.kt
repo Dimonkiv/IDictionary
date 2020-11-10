@@ -2,7 +2,6 @@ package com.dimonkiv.idictionary.ui.modules.newword
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dimonkiv.idictionary.data.FirebaseManager
 import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.data.models.Word
 import com.dimonkiv.idictionary.utills.SingleLiveEvent
@@ -53,14 +52,14 @@ class NewWordViewModel : ViewModel() {
     private fun loadData() {
         _isLoading.value = true
 
-        FirebaseManager.getInstance().getCardDataSource().getAll {
+        /*FirebaseManager.getInstance().getCardDataSource().getAll {
             cards.postValue(it)
             _isLoading.postValue(false)
-        }
+        }*/
     }
 
     private fun insertWord() {
-        FirebaseManager.getInstance().getWordDataSource().insert(word)
+        //FirebaseManager.getInstance().getWordDataSource().insert(word)
     }
 
 
@@ -84,7 +83,7 @@ class NewWordViewModel : ViewModel() {
     }
 
     fun onTranslatedTextChanged(translated: String) {
-        word.translated = translated
+        //word.translated = translated
     }
 
     fun onAddButtonClick() {
@@ -96,11 +95,11 @@ class NewWordViewModel : ViewModel() {
             return
         }
 
-        if (word.translated.isEmpty()) {
+        /*if (word.translated.isEmpty()) {
             _translatedTextError.call()
             _isLoading.value = false
             return
-        }
+        }*/
 
         insertWord()
         _clearFields.call()

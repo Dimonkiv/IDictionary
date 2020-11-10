@@ -3,10 +3,12 @@ package com.dimonkiv.idictionary.ui.modules.dictionary
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dimonkiv.idictionary.data.FirebaseManager
 import com.dimonkiv.idictionary.data.models.Card
+import com.dimonkiv.idictionary.data.source.CardDataSource
 
-class DictionaryViewModel : ViewModel() {
+class DictionaryViewModel(
+        private val cardDataSource: CardDataSource
+) : ViewModel() {
 
     private lateinit var cards: MutableLiveData<List<Card>>
     private lateinit var isLoading: MutableLiveData<Boolean>
@@ -37,12 +39,12 @@ class DictionaryViewModel : ViewModel() {
     private fun loadData() {
         isLoading.value = true
 
-        val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
+        //val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
 
-        cardDataSource.getAll {
+        /*cardDataSource.getAll {
             cards.postValue(it)
             isLoading.postValue(false)
-        }
+        }*/
     }
 
     fun removeCard(card: Card) {
@@ -52,9 +54,9 @@ class DictionaryViewModel : ViewModel() {
     private fun startWaitingRemoveTimer(card: Card) {
         isMustRemoveCard = true
         Handler().postDelayed({
-            if (isMustRemoveCard) {
+            /*if (isMustRemoveCard) {
                 FirebaseManager.getInstance().getCardDataSource().removeCard(card.id)
-            }
+            }*/
         }, 400)
     }
 }

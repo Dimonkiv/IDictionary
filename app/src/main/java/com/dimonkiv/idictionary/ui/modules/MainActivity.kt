@@ -15,8 +15,6 @@ import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.modules.inputtype.InputTypeFragment
 import com.dimonkiv.idictionary.ui.modules.newword.NewWordFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
@@ -24,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
         progressBar = findViewById(R.id.progress_bar)
         initBottomNavigationMenu()

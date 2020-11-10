@@ -46,7 +46,6 @@ class CardFragment : Fragment(){
         initUI()
         initToolbar()
         initAdapter()
-        resumeBundle()
         subscribeUI()
 
         return root
@@ -70,12 +69,12 @@ class CardFragment : Fragment(){
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_toolbar, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_toolbar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
 
             R.id.search -> {}
 
@@ -89,14 +88,6 @@ class CardFragment : Fragment(){
 
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         recyclerView.adapter = adapter
-    }
-
-    private fun resumeBundle() {
-        if (arguments?.containsKey(CARD_ID)!!) {
-            arguments?.getString(CARD_ID)?.let {
-                viewModel = ViewModelProviders.of(this, CardViewModel.CardViewModelFactory(it)).get(CardViewModel::class.java)
-            }
-        }
     }
 
 
