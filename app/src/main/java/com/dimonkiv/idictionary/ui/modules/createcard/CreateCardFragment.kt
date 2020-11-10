@@ -16,6 +16,7 @@ import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.modules.MainActivity
+import com.dimonkiv.idictionary.utills.obtainViewModel
 
 class CreateCardFragment : Fragment() {
     private lateinit var root: View
@@ -29,7 +30,7 @@ class CreateCardFragment : Fragment() {
     /*-----------------------------------------------Initialization---------------------------------------------------*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         root = inflater.inflate(R.layout.fragment_dialog_create_card, container, false)
-        viewModel = ViewModelProviders.of(this).get(CreateCardViewModel::class.java)
+        viewModel = obtainViewModel(CreateCardViewModel::class.java)
 
         initUI()
         setListeners()

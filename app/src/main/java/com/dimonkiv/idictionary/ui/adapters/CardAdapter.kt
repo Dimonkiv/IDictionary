@@ -38,8 +38,8 @@ class CardAdapter : RecyclerView.Adapter<CardAdapter.ViewHolder>() {
         private val translatedTV: TextView = itemView.findViewById(R.id.translated_tv)
 
         fun bind(word: Word) {
-            originalTV.text = word.original
-            translatedTV.text = word.translated
+            //originalTV.text = word.original
+            //translatedTV.text = word.translated
         }
     }
 }

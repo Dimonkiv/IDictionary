@@ -18,6 +18,7 @@ import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.ui.modules.card.CardFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
 import com.dimonkiv.idictionary.utills.RecyclerItemTouchHelper
+import com.dimonkiv.idictionary.utills.obtainViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
@@ -34,7 +35,7 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         root = inflater.inflate(R.layout.fragment_dictionary, container, false)
 
-        viewModel = ViewModelProviders.of(this).get(DictionaryViewModel::class.java)
+        viewModel = obtainViewModel(DictionaryViewModel::class.java)
         initUI()
         initToolbar()
         initAdapter()
@@ -56,12 +57,12 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_toolbar, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_toolbar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.search -> {}
 
             R.id.settings -> {}

@@ -46,7 +46,7 @@ class CardStackAdapter: RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
         fun bind(word: Word) {
             originalTV.text = word.original
-            translatedTV.text = word.translated
+            //translatedTV.text = word.translated
 
             showTranslateRL.setOnClickListener {
                 translatedTV.visibility = View.VISIBLE

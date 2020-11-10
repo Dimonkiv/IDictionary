@@ -3,11 +3,13 @@ package com.dimonkiv.idictionary.ui.modules.createcard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dimonkiv.idictionary.data.FirebaseManager
 import com.dimonkiv.idictionary.data.models.Card
+import com.dimonkiv.idictionary.data.source.CardDataSource
 import com.dimonkiv.idictionary.utills.SingleLiveEvent
 
-class CreateCardViewModel : ViewModel() {
+class CreateCardViewModel(
+        private val cardDataSource: CardDataSource
+) : ViewModel() {
     private val card = Card()
 
     private var _isLoading = MutableLiveData<Boolean>()
@@ -47,8 +49,7 @@ class CreateCardViewModel : ViewModel() {
 
     /*----------------------------------------------Work with data----------------------------------------------------*/
     private fun insertCard() {
-        val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
-        cardDataSource.insert(card)
+        cardDataSource.insertCard(card)
         _isLoading.value = false
     }
 }
