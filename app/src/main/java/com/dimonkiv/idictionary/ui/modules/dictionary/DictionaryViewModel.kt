@@ -39,12 +39,17 @@ class DictionaryViewModel(
     private fun loadData() {
         isLoading.value = true
 
-        //val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
+        cardDataSource.getCards(object : CardDataSource.LoadCardsDataSource {
+            override fun onLoadCards(card: List<Card>) {
+                cards.value = card
+                isLoading.value = false
+            }
 
-        /*cardDataSource.getAll {
-            cards.postValue(it)
-            isLoading.postValue(false)
-        }*/
+            override fun onDataNotAvailable() {
+                isLoading.value = false
+            }
+
+        })
     }
 
     fun removeCard(card: Card) {

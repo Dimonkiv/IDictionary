@@ -49,8 +49,7 @@ class CreateCardViewModel(
 
     /*----------------------------------------------Work with data----------------------------------------------------*/
     private fun insertCard() {
-        //val cardDataSource = FirebaseManager.getInstance().getCardDataSource()
-        //cardDataSource.insert(card)
+        cardDataSource.insertCard(card)
         _isLoading.value = false
     }
 }
