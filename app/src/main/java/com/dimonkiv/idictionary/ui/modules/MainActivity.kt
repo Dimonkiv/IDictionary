@@ -6,19 +6,26 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.dimonkiv.idictionary.utills.FragmentById.*
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.modules.card.CardFragment
+import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
 import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.modules.inputtype.InputTypeFragment
 import com.dimonkiv.idictionary.ui.modules.newword.NewWordFragment
+import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var progressBar: RelativeLayout
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +39,18 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation = findViewById(R.id.navigation_menu)
 
         bottomNavigation.setOnNavigationItemSelectedListener {
-            if (it.itemId == R.id.navigation_dictionary) {
-                changeFragment(FragmentData(DICTIONARY_FRAGMENT))
-            } else {
+            when(it.itemId) {
+                R.id.fragment_game -> changeFragment(FragmentData(WORD_GAME_FRAGMENT))
 
+                R.id.fragment_card -> changeFragment(FragmentData(DICTIONARY_FRAGMENT))
+
+                R.id.fragment_add -> changeFragment(FragmentData(CREATE_FRAGMENT))
+
+                R.id.fragment_statistic -> changeFragment(FragmentData(STATISTIC_FRAGMENT))
+
+                R.id.fragment_settings -> changeFragment(FragmentData(SETTINGS_FRAGMENT))
             }
+
             return@setOnNavigationItemSelectedListener true
         }
     }
@@ -44,24 +58,17 @@ class MainActivity : AppCompatActivity() {
     fun changeFragment(fragmentData: FragmentData) {
 
         when (fragmentData.getFragmentById()) {
+            WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), fragmentData.getBundle())
+
             DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
 
-            CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), fragmentData.getBundle())
+            CREATE_FRAGMENT -> addFragmentToContainer(CreateFragment(), null)
 
-            INPUT_TYPE_DIALOG_FRAGMENT -> addFragmentToDialogContainer(InputTypeFragment(), null)
-
-            CREATE_CARD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(CreateCardFragment(), null)
-
-            NEW_WORD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(NewWordFragment(), null)
-
-            WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), fragmentData.getBundle())
+            SETTINGS_FRAGMENT -> addFragmentToContainer(SettingsFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
 
-            CLOSE_DIALOG_FRAGMENT -> {
-                onBackPressed()
-                onBackPressed()
-            }
+
         }
     }
 
@@ -74,17 +81,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun addFragmentToDialogContainer(fragment: Fragment, bundle: Bundle?) {
-        if (bundle != null) {
-            fragment.arguments = bundle
-        }
-
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.dialog_container, fragment)
-                .addToBackStack("Dialog")
-                .commit()
     }
 
     fun showProgressBar() {

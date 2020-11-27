@@ -24,19 +24,8 @@
             app:itemIconTint="@drawable/selector_bottom_navigation"
             app:itemTextColor="@drawable/selector_bottom_navigation"
             app:menu="@menu/menu_bottom_navigation" />
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/dialog_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/progress_bar"

@@ -52,7 +52,6 @@ class WordGameFragment : Fragment(), CardStackListener {
         viewModel = ViewModelProviders.of(this).get(WordGameViewModel::class.java)
 
         initUI()
-        resumeBundle()
         initCardStack()
         setListeners()
         subscribeUI()
@@ -93,12 +92,6 @@ class WordGameFragment : Fragment(), CardStackListener {
             viewModel.onSettingsButtonClick()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun resumeBundle() {
-        if (arguments!!.containsKey(CARD_ID)) {
-            viewModel.cardId = arguments!!.getString(CARD_ID)!!
-        }
     }
 
     private fun subscribeUI() {
