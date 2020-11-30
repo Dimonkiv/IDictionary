@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dimonkiv.idictionary.data.source.CardDataSource
 import com.dimonkiv.idictionary.data.source.WordDataSource
 import com.dimonkiv.idictionary.ui.modules.card.CardViewModel
+import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordViewModel
 import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardViewModel
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryViewModel
 import java.lang.IllegalArgumentException
@@ -24,6 +25,8 @@ class ViewModelFactory private constructor(
                         CreateCardViewModel(cardDataSource)
                     isAssignableFrom(DictionaryViewModel::class.java) ->
                         DictionaryViewModel(cardDataSource)
+                    isAssignableFrom(AddWordViewModel::class.java) ->
+                        AddWordViewModel(cardDataSource, wordDataSource)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
