@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -12,6 +13,7 @@ import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
 import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordFragment
+import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
@@ -62,6 +64,8 @@ class MainActivity : AppCompatActivity() {
 
             ADD_WORD_FRAGMENT -> addFragmentToContainer(AddWordFragment(), null)
 
+            CREATE_CARD_FRAGMENT -> addFragmentToContainer(CreateCardFragment(), null)
+
             BACK_FRAGMENT -> onBackPressed()
 
 
@@ -85,5 +89,9 @@ class MainActivity : AppCompatActivity() {
 
     fun hideProgressBar() {
         progressBar.visibility = View.GONE
+    }
+
+    fun showToast(msg: String) {
+        Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
     }
 }

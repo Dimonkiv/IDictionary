@@ -12,5 +12,9 @@ data class Card(
         @ColumnInfo(name = "id")
         var id: String = UUID.randomUUID().toString(),
         @ColumnInfo(name = "title")
-        var title: String = ""
+        var title: String = "",
+        @ColumnInfo(name = "progress")
+        var progress: Int = 0,
+        @ColumnInfo(name = "need_learn")
+        var isNeedLearn: Boolean = false
 )

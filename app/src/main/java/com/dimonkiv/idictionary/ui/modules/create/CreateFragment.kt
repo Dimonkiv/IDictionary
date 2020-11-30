@@ -49,7 +49,7 @@ class CreateFragment : Fragment() {
 
         root.findViewById<RelativeLayout>(R.id.create_card_rl).apply {
             setOnClickListener {
-
+                (activity as MainActivity).changeFragment(FragmentData(FragmentById.CREATE_CARD_FRAGMENT))
             }
         }
     }
