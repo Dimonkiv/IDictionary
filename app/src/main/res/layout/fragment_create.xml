@@ -1,22 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="342dp"
-        android:layout_marginEnd="192dp"
-        android:layout_marginBottom="370dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/add_word_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_add_container"
+                android:padding="15dp"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/add_text_iv"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_add_text"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="40dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Додати слово"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primaryText"
+                    android:layout_below="@id/add_text_iv" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scan_word_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_add_container"
+                android:padding="15dp"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/add_scan_iv"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_add_scan"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="40dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Сканувати слова"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primaryText"
+                    android:layout_below="@id/add_scan_iv" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/import_word_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_add_container"
+                android:padding="15dp"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/add_file_iv"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_add_file"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="40dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Імпорт з файлу"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primaryText"
+                    android:layout_below="@id/add_file_iv" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/create_card_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_add_container"
+                android:padding="15dp"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/add_category_iv"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_add_category"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="40dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Створити картку"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primaryText"
+                    android:layout_below="@id/add_category_iv" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

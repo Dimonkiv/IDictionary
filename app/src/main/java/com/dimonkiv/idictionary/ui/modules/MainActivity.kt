@@ -7,18 +7,12 @@ import android.widget.RelativeLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.dimonkiv.idictionary.utills.FragmentById.*
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
-import com.dimonkiv.idictionary.ui.modules.card.CardFragment
 import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
-import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
+import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
-import com.dimonkiv.idictionary.ui.modules.inputtype.InputTypeFragment
-import com.dimonkiv.idictionary.ui.modules.newword.NewWordFragment
 import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
 
@@ -65,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             CREATE_FRAGMENT -> addFragmentToContainer(CreateFragment(), null)
 
             SETTINGS_FRAGMENT -> addFragmentToContainer(SettingsFragment(), null)
+
+            ADD_WORD_FRAGMENT -> addFragmentToContainer(AddWordFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
 
