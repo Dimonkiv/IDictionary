@@ -17,6 +17,7 @@ import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
+import com.dimonkiv.idictionary.ui.modules.words.WordsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
@@ -66,9 +67,9 @@ class MainActivity : AppCompatActivity() {
 
             CREATE_CARD_FRAGMENT -> addFragmentToContainer(CreateCardFragment(), null)
 
+            WORDS_FRAGMENT -> addFragmentToContainer(WordsFragment(), fragmentData.getBundle())
+
             BACK_FRAGMENT -> onBackPressed()
-
-
         }
     }
 

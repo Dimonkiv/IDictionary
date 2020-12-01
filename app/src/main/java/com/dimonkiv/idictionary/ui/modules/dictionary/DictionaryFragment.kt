@@ -18,6 +18,7 @@ import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
 import com.dimonkiv.idictionary.ui.modules.card.CardFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
+import com.dimonkiv.idictionary.ui.modules.words.WordsFragment
 import com.dimonkiv.idictionary.utills.RecyclerItemTouchHelper
 import com.dimonkiv.idictionary.utills.obtainViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -89,8 +90,8 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
         }
     }
 
-    override fun onItemClick(cardId: String) {
-        getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT, CardFragment.getBundle(cardId)))
+    override fun onItemClick(card: Card) {
+        getMainActivity().changeFragment(FragmentData(FragmentById.WORDS_FRAGMENT, WordsFragment.getBundle(card)))
     }
 
     override fun onRemoveItem(card: Card) {

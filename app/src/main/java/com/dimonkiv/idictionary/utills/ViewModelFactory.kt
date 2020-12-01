@@ -9,6 +9,7 @@ import com.dimonkiv.idictionary.ui.modules.card.CardViewModel
 import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordViewModel
 import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardViewModel
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryViewModel
+import com.dimonkiv.idictionary.ui.modules.words.WordsViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory private constructor(
@@ -27,6 +28,8 @@ class ViewModelFactory private constructor(
                         DictionaryViewModel(cardDataSource)
                     isAssignableFrom(AddWordViewModel::class.java) ->
                         AddWordViewModel(cardDataSource, wordDataSource)
+                    isAssignableFrom(WordsViewModel::class.java) ->
+                        WordsViewModel(wordDataSource)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
 
     interface Callback {
-        fun onItemClick(cardId: String)
+        fun onItemClick(card: Card)
 
         fun onRemoveItem(card: Card)
 
@@ -95,7 +95,7 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
             checkBox.setOnCheckedChangeListener { _, isChecked -> callback.onCheckboxChangeState(item, isChecked) }
 
             containerRL.setOnClickListener {
-                callback.onItemClick(item.id)
+                callback.onItemClick(item)
             }
         }
     }
