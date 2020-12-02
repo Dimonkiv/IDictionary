@@ -37,13 +37,13 @@ class CreateFragment : Fragment() {
 
         root.findViewById<RelativeLayout>(R.id.scan_word_rl).apply {
             setOnClickListener {
-
+                (activity as MainActivity).changeFragment(FragmentData(FragmentById.SCAN_WORD_FRAGMENT))
             }
         }
 
         root.findViewById<RelativeLayout>(R.id.import_word_rl).apply {
             setOnClickListener {
-
+                (activity as MainActivity).changeFragment(FragmentData(FragmentById.IMPORT_FILE_FRAGMENT))
             }
         }
 

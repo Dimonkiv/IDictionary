@@ -13,6 +13,8 @@ import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
 import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordFragment
+import com.dimonkiv.idictionary.ui.modules.create.importfile.ImportFileFragment
+import com.dimonkiv.idictionary.ui.modules.create.scanword.ScanWordsFragment
 import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
 import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
@@ -68,6 +70,10 @@ class MainActivity : AppCompatActivity() {
             CREATE_CARD_FRAGMENT -> addFragmentToContainer(CreateCardFragment(), null)
 
             WORDS_FRAGMENT -> addFragmentToContainer(WordsFragment(), fragmentData.getBundle())
+
+            SCAN_WORD_FRAGMENT -> addFragmentToContainer(ScanWordsFragment(), null)
+
+            IMPORT_FILE_FRAGMENT -> addFragmentToContainer(ImportFileFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
         }
