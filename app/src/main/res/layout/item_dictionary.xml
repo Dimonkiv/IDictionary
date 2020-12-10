@@ -5,37 +5,51 @@
     android:layout_marginBottom="10dp"
     android:padding="10dp"
     android:background="@drawable/background_item"
-    android:id="@+id/container_rl">
+    android:id="@+id/container_rl"
+    android:layout_below="@id/search_view">
+
+    <RelativeLayout
+        android:id="@+id/add_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/background_circle_yellow"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        >
+        <TextView
+            android:id="@+id/item_card_icon_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="T"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/title_tv"
+        android:id="@+id/item_card_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
         android:textColor="@color/primaryText"
-        android:textSize="@dimen/large_text"/>
+        android:textSize="@dimen/large_text"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/add_btn" />
     <TextView
-        android:id="@+id/subtitle_tv"
+        android:id="@+id/item_card_progress_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Subtitle"
+        android:text="55%"
         android:textColor="@color/secondaryText"
-        android:textSize="@dimen/small_text"
-        android:layout_below="@id/title_tv"/>
-
-    <com.dimonkiv.idictionary.ui.widgets.CustomProgressChart
-        android:id="@+id/progress_chart"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/item_card_checkbox"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"/>
+    <CheckBox
+        android:id="@+id/item_card_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@id/play_ib"/>
-
-    <ImageButton
-        android:id="@+id/play_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:src="@drawable/ic_play"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>

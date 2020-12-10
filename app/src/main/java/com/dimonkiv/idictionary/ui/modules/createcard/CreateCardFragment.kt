@@ -1,118 +1,94 @@
 package com.dimonkiv.idictionary.ui.modules.createcard
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.dimonkiv.idictionary.utills.FragmentById
-import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.data.models.Card
+import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.ui.modules.MainActivity
+import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryViewModel
+import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.utills.obtainViewModel
 
 class CreateCardFragment : Fragment() {
+
     private lateinit var root: View
-    private lateinit var cardET: EditText
-    private lateinit var backBtn: Button
+    private lateinit var toolbar: Toolbar
+    private lateinit var cardEditText: EditText
     private lateinit var addBtn: Button
 
     private lateinit var viewModel: CreateCardViewModel
 
+    private val mainActivity: MainActivity
+        get() = activity as MainActivity
 
-    /*-----------------------------------------------Initialization---------------------------------------------------*/
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        root = inflater.inflate(R.layout.fragment_dialog_create_card, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        root = inflater.inflate(R.layout.fragment_create_card, container, false)
+
         viewModel = obtainViewModel(CreateCardViewModel::class.java)
-
         initUI()
-        setListeners()
         subscribeUI()
 
         return root
     }
 
     private fun initUI() {
-        cardET = root.findViewById(R.id.card_et)
-        backBtn = root.findViewById(R.id.back_btn)
-        addBtn = root.findViewById(R.id.add_btn)
-    }
-
-    private fun setListeners() {
-        cardET.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
+        toolbar = root.findViewById<Toolbar>(R.id.toolbar).apply {
+            mainActivity.setSupportActionBar(this)
+            mainActivity.supportActionBar?.title = "Створити колоду"
+            setHasOptionsMenu(true)
+            setNavigationIcon(R.drawable.ic_arrow_back)
+            setNavigationOnClickListener {
+                mainActivity.changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.onCardTextChanged(s.toString())
-            }
-
-        })
-
-        backBtn.setOnClickListener {
-            showPreviousFragment()
         }
 
-        addBtn.setOnClickListener {
-            viewModel.onAddButtonClick()
+        cardEditText = root.findViewById<EditText>(R.id.card_et).apply {
+            addTextChangedListener {
+                viewModel.onCardTextChanged(it.toString())
+            }
         }
+
+
+        addBtn = root.findViewById<Button>(R.id.add_card_btn).apply {
+            setOnClickListener {
+                viewModel.onAddButtonClick()
+            }
+        }
+
     }
 
     private fun subscribeUI() {
-        viewModel.isLoading.observe(this, Observer {
-            if (it) showProgressBar()
+        viewModel.isLoading.observe(this, {
+            if(it) showProgressBar()
             else hideProgressBar()
         })
 
-        viewModel.isShownError.observe(this, Observer {
-            showMessage(getString(R.string.card_error))
+        viewModel.isShownError.observe(this, {
+            mainActivity.showToast("Введіть назву колоди!")
         })
 
-        viewModel.closeDialogs.observe(this, Observer {
-            closeDialogFragments()
+        viewModel.onSuccess.observe(this, {
+            mainActivity.showToast("Колоду створено!")
+            mainActivity.changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
         })
     }
 
-
-    /*-----------------------------------------------Show/hide view---------------------------------------------------*/
     private fun showProgressBar() {
-        getMainActivity().showProgressBar()
+        mainActivity.showProgressBar()
     }
 
     private fun hideProgressBar() {
-        getMainActivity().hideProgressBar()
+        mainActivity.hideProgressBar()
     }
-
-    private fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-
-    /*------------------------------------------------Navigation------------------------------------------------------*/
-    private fun showPreviousFragment() {
-        getMainActivity().changeFragment(FragmentData(FragmentById.BACK_FRAGMENT))
-    }
-
-    private fun closeDialogFragments() {
-        getMainActivity().changeFragment(FragmentData(FragmentById.CLOSE_DIALOG_FRAGMENT))
-    }
-
-
-    /*-----------------------------------------------Other methods----------------------------------------------------*/
-    private fun getMainActivity(): MainActivity {
-        return activity as MainActivity
-    }
-
 }

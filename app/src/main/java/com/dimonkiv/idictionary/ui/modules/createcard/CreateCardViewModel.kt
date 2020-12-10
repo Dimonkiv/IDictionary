@@ -14,12 +14,12 @@ class CreateCardViewModel(
 
     private var _isLoading = MutableLiveData<Boolean>()
     private var _isShownError = SingleLiveEvent<Any>()
-    private val _closeDialogs = SingleLiveEvent<Any>()
+    private val _isSuccess = SingleLiveEvent<Any>()
 
 
     /*-----------------------------------------------Get data---------------------------------------------------------*/
-    val closeDialogs: LiveData<Any>
-        get() = _closeDialogs
+    val onSuccess: LiveData<Any>
+        get() = _isSuccess
 
     val isLoading: LiveData<Boolean>
         get() = _isLoading
@@ -43,7 +43,7 @@ class CreateCardViewModel(
         }
 
         insertCard()
-        _closeDialogs.call()
+        _isSuccess.call()
     }
 
 

@@ -6,16 +6,16 @@ import android.view.*
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.dimonkiv.idictionary.utills.FragmentById
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.data.models.Word
-import com.dimonkiv.idictionary.ui.adapters.CardAdapter
+import com.dimonkiv.idictionary.ui.adapters.RepeatWordAdapter
 import com.dimonkiv.idictionary.ui.modules.MainActivity
+import com.dimonkiv.idictionary.utills.obtainViewModel
 
-class CardFragment : Fragment(){
+class RepeatWordFragment : Fragment(){
 
     private lateinit var root: View
     private lateinit var toolbar: Toolbar
@@ -24,8 +24,8 @@ class CardFragment : Fragment(){
     private lateinit var goodCountTV: TextView
     private lateinit var badCountTV: TextView
 
-    private lateinit var adapter: CardAdapter
-    private lateinit var viewModel: CardViewModel
+    private lateinit var adapter: RepeatWordAdapter
+    private lateinit var viewModel: RepeatWordViewModel
 
     companion object {
         private const val CARD_ID = "cardId"
@@ -43,6 +43,7 @@ class CardFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         root = inflater.inflate(R.layout.fragment_card, container, false)
 
+        viewModel = obtainViewModel(RepeatWordViewModel::class.java)
         initUI()
         initToolbar()
         initAdapter()
@@ -62,6 +63,7 @@ class CardFragment : Fragment(){
     private fun initToolbar() {
         getMainActivity().setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
+        getMainActivity().supportActionBar?.title = "Повторити вивчені слова"
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.setNavigationOnClickListener {
@@ -84,7 +86,7 @@ class CardFragment : Fragment(){
     }
 
     private fun initAdapter() {
-        adapter = CardAdapter()
+        adapter = RepeatWordAdapter()
 
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         recyclerView.adapter = adapter
@@ -93,14 +95,12 @@ class CardFragment : Fragment(){
 
     /*-----------------------------------------------Show initial data------------------------------------------------*/
     private fun subscribeUI() {
-        viewModel.getIsLoading().observe(this, Observer<Boolean> {
+        viewModel.getIsLoading().observe(this, {
             if(it) showProgressBar()
             else hideProgressBar()
         })
 
-        viewModel.getCard().observe(this, Observer<Card> {showTitle(it.title)})
-
-        viewModel.getWords().observe(this, Observer<List<Word>> { showWords(it) })
+        viewModel.getWords().observe(this, { showWords(it) })
     }
 
     private fun showTitle(title: String) {

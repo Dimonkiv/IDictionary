@@ -3,6 +3,7 @@ package com.dimonkiv.idictionary.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -15,11 +16,11 @@ import com.google.android.material.snackbar.Snackbar
 class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<DictionaryAdapter.ViewHolder>(){
 
     interface Callback {
-        fun onItemClick(cardId: String)
-
-        fun onPlayButtonClick(cardId: String)
+        fun onItemClick(card: Card)
 
         fun onRemoveItem(card: Card)
+
+        fun onCheckboxChangeState(card: Card, isChecked: Boolean)
 
         fun undoRemove()
     }
@@ -76,21 +77,25 @@ class DictionaryAdapter(private val callback: Callback) : RecyclerView.Adapter<D
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTV: TextView = itemView.findViewById(R.id.title_tv)
-        private val subtitleTV: TextView = itemView.findViewById(R.id.subtitle_tv)
-        private val progressChart: CustomProgressChart = itemView.findViewById(R.id.progress_chart)
+        private val titleTV: TextView = itemView.findViewById(R.id.item_card_title_tv)
+        private val progressTV: TextView = itemView.findViewById(R.id.item_card_progress_tv)
+        private val iconTv: TextView = itemView.findViewById(R.id.item_card_icon_tv)
         private val containerRL: RelativeLayout = itemView.findViewById(R.id.container_rl)
-        private val playIB: ImageButton = itemView.findViewById(R.id.play_ib)
+        private val checkBox: CheckBox = itemView.findViewById(R.id.item_card_checkbox)
 
         fun bind(item: Card) {
             titleTV.text = item.title
 
-            containerRL.setOnClickListener {
-                callback.onItemClick(item.id)
-            }
+            iconTv.text = item.title.subSequence(0,1).toString().toUpperCase()
 
-            playIB.setOnClickListener {
-                callback.onPlayButtonClick(item.id)
+            progressTV.text = "${item.progress}%"
+
+            checkBox.isChecked = item.isNeedLearn
+
+            checkBox.setOnCheckedChangeListener { _, isChecked -> callback.onCheckboxChangeState(item, isChecked) }
+
+            containerRL.setOnClickListener {
+                callback.onItemClick(item)
             }
         }
     }

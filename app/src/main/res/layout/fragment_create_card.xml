@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        app:titleTextColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/card_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Назва колоди"
+        android:layout_below="@id/toolbar"/>
+
+    <Button
+        android:id="@+id/add_card_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_button"
+        android:layout_margin="15dp"
+        android:text="Створити колоду"
+        android:textColor="@android:color/white"/>
+</RelativeLayout>

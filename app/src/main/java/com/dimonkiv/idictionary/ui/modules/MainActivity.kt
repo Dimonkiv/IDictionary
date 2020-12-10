@@ -4,21 +4,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.dimonkiv.idictionary.utills.FragmentById.*
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
-import com.dimonkiv.idictionary.ui.modules.card.CardFragment
+import com.dimonkiv.idictionary.ui.modules.card.RepeatWordFragment
+import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
+import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordFragment
+import com.dimonkiv.idictionary.ui.modules.create.importfile.ImportFileFragment
+import com.dimonkiv.idictionary.ui.modules.create.scanword.ScanWordsFragment
 import com.dimonkiv.idictionary.ui.modules.createcard.CreateCardFragment
 import com.dimonkiv.idictionary.ui.modules.dictionary.DictionaryFragment
-import com.dimonkiv.idictionary.ui.modules.inputtype.InputTypeFragment
-import com.dimonkiv.idictionary.ui.modules.newword.NewWordFragment
+import com.dimonkiv.idictionary.ui.modules.settings.SettingsFragment
 import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
+import com.dimonkiv.idictionary.ui.modules.words.WordsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var progressBar: RelativeLayout
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +39,18 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation = findViewById(R.id.navigation_menu)
 
         bottomNavigation.setOnNavigationItemSelectedListener {
-            if (it.itemId == R.id.navigation_dictionary) {
-                changeFragment(FragmentData(DICTIONARY_FRAGMENT))
-            } else {
+            when(it.itemId) {
+                R.id.fragment_game -> changeFragment(FragmentData(WORD_GAME_FRAGMENT))
 
+                R.id.fragment_card -> changeFragment(FragmentData(DICTIONARY_FRAGMENT))
+
+                R.id.fragment_add -> changeFragment(FragmentData(CREATE_FRAGMENT))
+
+                R.id.fragment_statistic -> changeFragment(FragmentData(STATISTIC_FRAGMENT))
+
+                R.id.fragment_settings -> changeFragment(FragmentData(SETTINGS_FRAGMENT))
             }
+
             return@setOnNavigationItemSelectedListener true
         }
     }
@@ -44,24 +58,27 @@ class MainActivity : AppCompatActivity() {
     fun changeFragment(fragmentData: FragmentData) {
 
         when (fragmentData.getFragmentById()) {
-            DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
-
-            CARD_FRAGMENT -> addFragmentToContainer(CardFragment(), fragmentData.getBundle())
-
-            INPUT_TYPE_DIALOG_FRAGMENT -> addFragmentToDialogContainer(InputTypeFragment(), null)
-
-            CREATE_CARD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(CreateCardFragment(), null)
-
-            NEW_WORD_DIALOG_FRAGMENT -> addFragmentToDialogContainer(NewWordFragment(), null)
-
             WORD_GAME_FRAGMENT -> addFragmentToContainer(WordGameFragment(), fragmentData.getBundle())
 
-            BACK_FRAGMENT -> onBackPressed()
+            DICTIONARY_FRAGMENT -> addFragmentToContainer(DictionaryFragment(), null)
 
-            CLOSE_DIALOG_FRAGMENT -> {
-                onBackPressed()
-                onBackPressed()
-            }
+            CREATE_FRAGMENT -> addFragmentToContainer(CreateFragment(), null)
+
+            SETTINGS_FRAGMENT -> addFragmentToContainer(SettingsFragment(), null)
+
+            ADD_WORD_FRAGMENT -> addFragmentToContainer(AddWordFragment(), null)
+
+            CREATE_CARD_FRAGMENT -> addFragmentToContainer(CreateCardFragment(), null)
+
+            WORDS_FRAGMENT -> addFragmentToContainer(WordsFragment(), fragmentData.getBundle())
+
+            SCAN_WORD_FRAGMENT -> addFragmentToContainer(ScanWordsFragment(), null)
+
+            IMPORT_FILE_FRAGMENT -> addFragmentToContainer(ImportFileFragment(), null)
+
+            REPEAT_WORD_FRAGMENT -> addFragmentToContainer(RepeatWordFragment(), null)
+
+            BACK_FRAGMENT -> onBackPressed()
         }
     }
 
@@ -76,22 +93,15 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun addFragmentToDialogContainer(fragment: Fragment, bundle: Bundle?) {
-        if (bundle != null) {
-            fragment.arguments = bundle
-        }
-
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.dialog_container, fragment)
-                .addToBackStack("Dialog")
-                .commit()
-    }
-
     fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
 
     fun hideProgressBar() {
         progressBar.visibility = View.GONE
+    }
+
+    fun showToast(msg: String) {
+        Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
     }
 }

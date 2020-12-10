@@ -34,6 +34,7 @@
         android:background="@color/secondaryText" />
 
     <RelativeLayout
+        android:id="@+id/translate_container_el"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
@@ -45,7 +46,14 @@
             android:layout_centerHorizontal="true"
             android:text="український"
             android:textColor="@color/secondaryText"
-            android:textSize="@dimen/normal_text" />
+            android:textSize="@dimen/normal_text"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/show_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_eye_grey"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
 

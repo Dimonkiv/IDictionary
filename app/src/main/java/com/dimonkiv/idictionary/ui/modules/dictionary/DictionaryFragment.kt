@@ -3,9 +3,8 @@ package com.dimonkiv.idictionary.ui.modules.dictionary
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.*
-import androidx.appcompat.widget.Toolbar
+import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,20 +14,18 @@ import com.dimonkiv.idictionary.ui.modules.MainActivity
 import com.dimonkiv.idictionary.R
 import com.dimonkiv.idictionary.data.models.Card
 import com.dimonkiv.idictionary.ui.adapters.DictionaryAdapter
-import com.dimonkiv.idictionary.ui.modules.card.CardFragment
-import com.dimonkiv.idictionary.ui.modules.wordgame.WordGameFragment
+import com.dimonkiv.idictionary.ui.modules.words.WordsFragment
 import com.dimonkiv.idictionary.utills.RecyclerItemTouchHelper
 import com.dimonkiv.idictionary.utills.obtainViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
     private lateinit var root: View
-    private lateinit var toolbar: Toolbar
     private lateinit var recyclerView: RecyclerView
-    private lateinit var addBtn: FloatingActionButton
+    private lateinit var addCardRL: RelativeLayout
 
     private lateinit var adapter: DictionaryAdapter
     private lateinit var viewModel: DictionaryViewModel
+
 
 
     /*------------------------------------------------Initialization--------------------------------------------------*/
@@ -37,7 +34,6 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
 
         viewModel = obtainViewModel(DictionaryViewModel::class.java)
         initUI()
-        initToolbar()
         initAdapter()
         setListeners()
         subscribeUI()
@@ -46,29 +42,8 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
     }
 
     private fun initUI() {
-        toolbar = root.findViewById(R.id.toolbar)
         recyclerView = root.findViewById(R.id.recycler_view)
-        addBtn = root.findViewById(R.id.add_fab)
-    }
-
-    private fun initToolbar() {
-        getMainActivity().setSupportActionBar(toolbar)
-        getMainActivity().supportActionBar?.title = context?.resources?.getString(R.string.dictionary)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_toolbar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.search -> {}
-
-            R.id.settings -> {}
-        }
-
-        return super.onOptionsItemSelected(item)
+        addCardRL = root.findViewById(R.id.add_container_rl)
     }
 
     private fun initAdapter() {
@@ -104,21 +79,21 @@ class DictionaryFragment : Fragment(), DictionaryAdapter.Callback {
 
     /*-----------------------------------------------Set listeners----------------------------------------------------*/
     private fun setListeners() {
-        addBtn.setOnClickListener {
-            getMainActivity().changeFragment(FragmentData(FragmentById.INPUT_TYPE_DIALOG_FRAGMENT))
+        addCardRL.setOnClickListener{
+            (activity as MainActivity).changeFragment(FragmentData(FragmentById.CREATE_CARD_FRAGMENT))
         }
     }
 
-    override fun onItemClick(cardId: String) {
-        getMainActivity().changeFragment(FragmentData(FragmentById.CARD_FRAGMENT, CardFragment.getBundle(cardId)))
-    }
-
-    override fun onPlayButtonClick(cardId: String) {
-        getMainActivity().changeFragment(FragmentData(FragmentById.WORD_GAME_FRAGMENT, WordGameFragment.getBundle(cardId)))
+    override fun onItemClick(card: Card) {
+        getMainActivity().changeFragment(FragmentData(FragmentById.WORDS_FRAGMENT, WordsFragment.getBundle(card)))
     }
 
     override fun onRemoveItem(card: Card) {
         viewModel.removeCard(card)
+    }
+
+    override fun onCheckboxChangeState(card: Card, isChecked: Boolean) {
+
     }
 
     override fun undoRemove() {
