@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import com.dimonkiv.idictionary.utills.FragmentById.*
 import com.dimonkiv.idictionary.data.models.FragmentData
 import com.dimonkiv.idictionary.R
+import com.dimonkiv.idictionary.ui.modules.card.RepeatWordFragment
 import com.dimonkiv.idictionary.ui.modules.create.CreateFragment
 import com.dimonkiv.idictionary.ui.modules.create.addword.AddWordFragment
 import com.dimonkiv.idictionary.ui.modules.create.importfile.ImportFileFragment
@@ -74,6 +75,8 @@ class MainActivity : AppCompatActivity() {
             SCAN_WORD_FRAGMENT -> addFragmentToContainer(ScanWordsFragment(), null)
 
             IMPORT_FILE_FRAGMENT -> addFragmentToContainer(ImportFileFragment(), null)
+
+            REPEAT_WORD_FRAGMENT -> addFragmentToContainer(RepeatWordFragment(), null)
 
             BACK_FRAGMENT -> onBackPressed()
         }
